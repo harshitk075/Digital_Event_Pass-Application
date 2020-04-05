@@ -9,7 +9,9 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("testing"),
+      body: SafeArea(
+         child: Text("This is the Home page"),
+      ),
     );
   }
 }
