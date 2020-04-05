@@ -4,7 +4,7 @@ import 'package:digitaleventpass/pages/organizerpage.dart';
 import 'package:digitaleventpass/pages/userpage.dart';
 
 void main() => runApp(MaterialApp(
-   initialRoute: "/userPage",
+   initialRoute: "/",
    routes: {
      "/" : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
