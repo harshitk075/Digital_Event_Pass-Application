@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "193246616223",
+    "firebase_url": "https://digital-event-pass.firebaseio.com",
+    "project_id": "digital-event-pass",
+    "storage_bucket": "digital-event-pass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193246616223:android:756322fb129cc51f95a0aa",
+        "android_client_info": {
+          "package_name": "harshit.flutter.digitaleventpass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193246616223-srt66m5s1httft5l9ls4fvdp5eih0gej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFVknvNl1kQA2XybTxnkHoR3gnT3sn2ak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193246616223-srt66m5s1httft5l9ls4fvdp5eih0gej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
