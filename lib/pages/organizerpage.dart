@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class organizerPage extends StatefulWidget {
   @override
@@ -7,18 +8,66 @@ class organizerPage extends StatefulWidget {
 }
 
 class _organizerPageState extends State<organizerPage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-         backgroundColor: Colors.indigo,
-         title: Row(
-           children: <Widget>[
-             Text("Organizer Home Page"),
-           ],
+      backgroundColor: Colors.grey[200],
+       body: SafeArea(
+         child: Padding(
+           padding: const EdgeInsets.symmetric(vertical: 30.0),
+           child: ListView(
+             children: <Widget>[
+               Padding(
+                 padding: const EdgeInsets.only(left: 30.0, right: 120.0),
+                 child: Text(
+                   "choose your action",
+                   style: TextStyle(
+                     fontSize: 30.0,
+                     fontWeight: FontWeight.bold,
+                   ),
+                 ),
+               ),
+               SizedBox(height: 20.0),
+                Row(
+                  children: <Widget>[
+
+                  ],
+                ),
+               SizedBox(height: 40.0),
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "Options available",
+                           style: TextStyle(
+                             fontWeight: FontWeight.bold,
+                             fontSize: 18.0,
+                             letterSpacing: 1.5,
+                           ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 300.0,
+                    color: Colors.blueGrey,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 1,
+                        itemBuilder: null
+                    ),
+                  ),
+                ],
+              )
+             ],
+           ),
          ),
-         centerTitle: true,
-      ),
+       ),
       drawer : Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical

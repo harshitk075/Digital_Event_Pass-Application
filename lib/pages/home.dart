@@ -37,7 +37,7 @@ class _homeState extends State<home> {
                       SizedBox(
                         width: 15.0,
                       ),
-                      Text('ORGANIZE AN EVENT', style: TextStyle(
+                      Text('ORGANIZE \nAN EVENT', style: TextStyle(
                           color: Colors.brown[800],
                       fontWeight: FontWeight.w800,
                         fontSize: 20
@@ -69,7 +69,7 @@ class _homeState extends State<home> {
                           SizedBox(
                             width: 10.0,
                           ),
-                          Text('EXPLORE EVENTS', style: TextStyle(color: Colors.white)),
+                          Text('EXPLORE EVENTS ', style: TextStyle(color: Colors.white)),
                         ]),
                   ),
                 ),
