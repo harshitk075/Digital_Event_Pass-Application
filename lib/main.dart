@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:digitaleventpass/screens/home.dart';
+import 'screens/creator.dart';
 
 void main() => runApp(MaterialApp(
   home: MyApp(),
+  routes: {
+    "/creator":(context) => eventCreator()
+  },
 ));
 
 class MyApp extends StatelessWidget{
-  Widget build(BuildContext context){
-  return Scaffold(
-    appBar: AppBar(
-      title: Text("Digital Event Pass",style: TextStyle(color: Colors.black)),
-    ),
-    body: Center(child: Text("Hello")),
-    bottomNavigationBar: BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle),
-        title: Text("User")),
-        BottomNavigationBarItem(icon: Icon(Icons.list),
-        title: Text("List")
-        )
-      ]
-    )
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return homePage();
+  }
 }
