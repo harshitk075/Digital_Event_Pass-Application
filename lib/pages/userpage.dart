@@ -1,4 +1,6 @@
+import 'package:flappy_search_bar/scaled_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 
 class userPage extends StatefulWidget {
   @override
@@ -10,10 +12,68 @@ class _userPageState extends State<userPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         backgroundColor: Colors.indigo,
+         backgroundColor: Color.fromARGB(255, 74, 22, 60),
          title: Text("UserPage"),
          centerTitle: true,
       ),
+      body: SafeArea(
+        child: SearchBar<Post>(
+          searchBarPadding: EdgeInsets.symmetric(horizontal: 10),
+          headerPadding: EdgeInsets.symmetric(horizontal: 10),
+          listPadding: EdgeInsets.symmetric(horizontal: 10),
+          onSearch: _getALlPosts,
+//          searchBarController: _searchBarController,
+          placeHolder: Text("placeholder"),
+          cancellationWidget: Text("Cancel"),
+          emptyWidget: Text("empty"),
+          indexedScaledTileBuilder: (int index) => ScaledTile.count(1, index.isEven ? 2 : 1),
+          header: Row(
+            children: <Widget>[
+              RaisedButton(
+                child: Text("sort"),
+                onPressed: () {
+//                  _searchBarController.sortList((Post a, Post b) {
+//                    return a.body.compareTo(b.body);
+//                  });
+                },
+              ),
+              RaisedButton(
+                child: Text("Desort"),
+                onPressed: () {
+//                  _searchBarController.removeSort();
+                },
+              ),
+              RaisedButton(
+                child: Text("Replay"),
+                onPressed: () {
+//                  isReplay = !isReplay;
+//                  _searchBarController.replayLastSearch();
+                },
+              ),
+            ],
+          ),
+          onCancelled: () {
+            print("Cancelled triggered");
+          },
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          crossAxisCount: 2,
+          onItemFound: (Post post, int index) {
+            return Container(
+              color: Colors.lightBlue,
+              child: ListTile(
+                title: Text(post.title),
+                isThreeLine: true,
+                subtitle: Text(post.body),
+                onTap: () {
+//                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
+                },
+              ),
+            );
+          },
+        ),
+      ),
+
       drawer : Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -23,9 +83,10 @@ class _userPageState extends State<userPage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Text('Drawer Header',
+              style: TextStyle(color: Colors.white),),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color.fromARGB(255, 166, 22, 92),
               ),
             ),
             ListTile(
@@ -45,16 +106,29 @@ class _userPageState extends State<userPage> {
           ],
         ),
       ),
-      floatingActionButton: RaisedButton.icon(
+      floatingActionButton: FloatingActionButton.extended(
+        
+        backgroundColor: Color.fromARGB(255, 166, 22, 92),
         onPressed: (){
           Navigator.pop(context);
         },
         icon: Icon(
           Icons.arrow_back,
+          color: Colors.white ,
         ),
-        label: Text("BACK"),
-        splashColor: Colors.blueGrey,
+        label: Text("BACK",
+        style: TextStyle(color: Colors.white),
+       
       ),
-    );
+    ));
   }
+
+  Future<List<Post>> _getALlPosts(String text) {
+
+  }
+}
+
+class Post {
+  String title = "Abcdefgh";
+  String body = "aaj searchbar laga kar dekhenge";
 }

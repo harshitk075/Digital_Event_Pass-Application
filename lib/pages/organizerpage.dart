@@ -1,17 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:qrcode/qrcode.dart';
 class organizerPage extends StatefulWidget {
   @override
   _organizerPageState createState() => _organizerPageState();
+
+
 }
 
 class _organizerPageState extends State<organizerPage> {
+  QRCaptureController _captureController = QRCaptureController();
+
+  bool _isTorchOn = false;
+  @override
+  void initState() {
+    super.initState();
+
+    _captureController.onCapture((data) {
+      print('onCapture----$data');
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          QRCaptureView(controller: _captureController),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _buildToolBar(),
+          )
+        ],
+      ),
       appBar: AppBar(
-         backgroundColor: Colors.indigo,
+         backgroundColor: Color.fromARGB(255, 74, 22, 60),
          title: Row(
            children: <Widget>[
              Text("Organizer Home Page"),
@@ -30,7 +53,7 @@ class _organizerPageState extends State<organizerPage> {
             DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Colors.indigo[300],
+                color: Color.fromARGB(255, 166, 22, 92),
               ),
             ),
             ListTile(
@@ -50,16 +73,53 @@ class _organizerPageState extends State<organizerPage> {
           ],
         ),
       ),
-      floatingActionButton: RaisedButton.icon(
-          onPressed: (){
-             Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-          ),
-          label: Text("BACK"),
-          splashColor: Colors.blueGrey,
-       ),
+      floatingActionButton: FloatingActionButton.extended(
+
+        backgroundColor: Color.fromARGB(255, 166, 22, 92),
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.white ,
+        ),
+        label: Text("BACK",
+          style: TextStyle(color: Colors.white),
+
+        ),
+      )
       );
   }
+  Widget _buildToolBar() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        FlatButton(
+          onPressed: () {
+            _captureController.pause();
+          },
+          child: Text('pause'),
+        ),
+        FlatButton(
+          onPressed: () {
+            if (_isTorchOn) {
+              _captureController.torchMode = CaptureTorchMode.off;
+            } else {
+              _captureController.torchMode = CaptureTorchMode.on;
+            }
+            _isTorchOn = !_isTorchOn;
+          },
+          child: Text('torch'),
+        ),
+        FlatButton(
+          onPressed: () {
+            _captureController.resume();
+          },
+          child: Text('resume'),
+        ),
+      ],
+    );
+  }
 }
+
