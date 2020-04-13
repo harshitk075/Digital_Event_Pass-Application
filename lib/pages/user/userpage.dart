@@ -49,7 +49,7 @@ class _userPageState extends State<userPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        
+
         backgroundColor: Color.fromARGB(255, 166, 22, 92),
         onPressed: (){
           Navigator.pop(context);
@@ -60,12 +60,8 @@ class _userPageState extends State<userPage> {
         ),
         label: Text("BACK",
         style: TextStyle(color: Colors.white),
-       
+
       ),
     ));
   }
-
-
 }
-
-
