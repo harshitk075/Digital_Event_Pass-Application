@@ -5,10 +5,11 @@ class eventCreator extends StatelessWidget{
   Widget build(BuildContext context) {
     var borderSide = BorderSide();
     return Scaffold(
+      backgroundColor: Color(0xFF80D8FF),
       body: Center(
         child: Card(
           child: Container(
-            height: 320,
+            height: 350,
             width: 300,
             child: Column(
               children: <Widget>[
@@ -25,7 +26,7 @@ class eventCreator extends StatelessWidget{
                 ),
                 
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, right:10.0),
                   child: Container(child: TextFormField(
                     decoration: InputDecoration(
                       hintStyle: TextStyle(fontWeight:FontWeight.bold),
@@ -44,7 +45,7 @@ class eventCreator extends StatelessWidget{
                   width: 250,),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, right:10.0),
                   child: Container(child: TextFormField(
                     decoration: InputDecoration(
                       hintStyle: TextStyle(fontWeight:FontWeight.bold),
