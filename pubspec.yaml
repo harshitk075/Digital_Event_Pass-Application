@@ -51,6 +51,7 @@ flutter:
     - assets/newevent.png
     - assets/img2.png
     - assets/backtexture.png
+    - assets/loginback.png
     - assets/profile.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
