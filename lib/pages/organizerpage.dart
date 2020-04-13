@@ -11,6 +11,7 @@ class _organizerPageState extends State<organizerPage> {
 
   List<String> coll= ["Create New Event","Manage Existing Event","View Profile"];
   List<String> img= ["assets/newevent.png","assets/img2.png","assets/profile.jpg"];
+  List<String> navi=["/newevent","/manageevent","/orgprofile"];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
@@ -22,7 +23,8 @@ class _organizerPageState extends State<organizerPage> {
        }
      else if(index==1)
        {
-         Navigator.popAndPushNamed(context, '/');
+         //Navigator.popAndPushNamed(context, '/');
+         Navigator.pop(context);
        }
   }
 
@@ -58,13 +60,7 @@ class _organizerPageState extends State<organizerPage> {
                      ),
                  ],
                ),
-               SizedBox(height: 20.0),
-                Row(
-                  children: <Widget>[
-
-                  ],
-                ),
-               SizedBox(height: 40.0),
+               SizedBox(height: 60.0),
               Column(
                 children: <Widget>[
                   Padding(
@@ -89,59 +85,64 @@ class _organizerPageState extends State<organizerPage> {
                       scrollDirection: Axis.horizontal,
                         itemCount: coll.length,
                         itemBuilder: (BuildContext ctx,int idx){
-                          return Container(
-                            margin: EdgeInsets.all(10.0),
-                            width: 210.0,
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              children: <Widget>[
-                              Positioned(
-                                bottom : 15.0,
-                                child: Container(
-                                  width: 200.0,
-                                  height: 120.0,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        Text(
-                                           coll[idx],
-                                           style: TextStyle(
-                                             fontSize: 22.0,
-                                           ),
-                                        )
-                                      ],
+                          return GestureDetector(
+                            onTap: (){
+                            Navigator.pushNamed(context, navi[idx]);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10.0),
+                              width: 210.0,
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: <Widget>[
+                                Positioned(
+                                  bottom : 15.0,
+                                  child: Container(
+                                    width: 200.0,
+                                    height: 120.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(
+                                             coll[idx],
+                                             style: TextStyle(
+                                               fontSize: 22.0,
+                                             ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20.0),
-                                boxShadow: [BoxShadow(
-                                    color: Colors.black26,
-                                    offset: Offset(0.0,2.0),
-                                     blurRadius: 6.0,
-                                )],
-                                ),
-                                child: Stack(
-                                  children: <Widget>[
-                                       ClipRRect(
-                                         borderRadius :BorderRadius.circular(20.0),
-                                         child: Image(height: 180.0,width: 180.0,
-                                         image: AssetImage(img[idx]),
-                                         fit: BoxFit.cover,
+                                Container(
+                                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20.0),
+                                  boxShadow: [BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0.0,2.0),
+                                       blurRadius: 6.0,
+                                  )],
+                                  ),
+                                  child: Stack(
+                                    children: <Widget>[
+                                         ClipRRect(
+                                           borderRadius :BorderRadius.circular(20.0),
+                                           child: Image(height: 180.0,width: 180.0,
+                                           image: AssetImage(img[idx]),
+                                           fit: BoxFit.cover,
+                                           ),
                                          ),
-                                       ),
-                                  ],
-                                ),
-                              )
-                            ],),
+                                    ],
+                                  ),
+                                )
+                              ],),
+                            ),
                           );
                         }
                     ),
