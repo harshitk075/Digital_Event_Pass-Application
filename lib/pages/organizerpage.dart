@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class organizerPage extends StatefulWidget {
   @override
@@ -31,6 +30,15 @@ class _organizerPageState extends State<organizerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+         backgroundColor: Color.fromARGB(255, 74, 22, 60),
+         title: Row(
+           children: <Widget>[
+             Text("Organizer Home Page"),
+           ],
+         ),
+         centerTitle: true,
+      ),
       key: _scaffoldKey,
       backgroundColor: Colors.grey[200],
        body: SafeArea(
@@ -164,7 +172,7 @@ class _organizerPageState extends State<organizerPage> {
             DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Colors.indigo[300],
+                color: Color.fromARGB(255, 166, 22, 92),
               ),
             ),
             ListTile(
@@ -182,6 +190,21 @@ class _organizerPageState extends State<organizerPage> {
               },
             ),
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+
+        backgroundColor: Color.fromARGB(255, 166, 22, 92),
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.white ,
+        ),
+        label: Text("BACK",
+          style: TextStyle(color: Colors.white),
+
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -202,4 +225,5 @@ class _organizerPageState extends State<organizerPage> {
       ),
       );
   }
+
 }

@@ -29,6 +29,8 @@ dependencies:
   firebase_analytics: ^5.0.11
   firebase_messaging: ^6.0.9
   firebase_auth: ^0.14.0+5
+  flappy_search_bar: ^1.7.2
+  qrcode: ^1.0.4
   font_awesome_flutter: ^8.8.1
 
 dev_dependencies:
@@ -53,6 +55,7 @@ flutter:
     - assets/backtexture.png
     - assets/loginback.jpg
     - assets/profile.jpg
+    - images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
