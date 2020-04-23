@@ -20,8 +20,8 @@ class _homeState extends State<home> {
             alignment: FractionalOffset.bottomCenter,
             child: Container(
 
-            margin: EdgeInsets.fromLTRB(0,100,0,0),
-      child: Image.asset('images/party4.png'),
+              margin: EdgeInsets.fromLTRB(0,100,0,0),
+              child: Image.asset('images/party4.png'),
     ),
           ),
     ),
@@ -50,7 +50,6 @@ class _homeState extends State<home> {
                       padding: EdgeInsets.fromLTRB(30, 15, 15, 15),
                       height:100.0,
                       child :Row(
-
                           children: <Widget>[Icon(Icons.business_center, size: 70,
                             color: Colors.brown[800],),
                             SizedBox(
