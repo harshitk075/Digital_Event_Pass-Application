@@ -7,6 +7,8 @@ class CreateNewEvent extends StatefulWidget {
 }
 
 class _CreateNewEventState extends State<CreateNewEvent> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -104,7 +106,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                ),
             ),
           ],
-      ),
+         ),
       ),
     );
   }

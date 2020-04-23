@@ -10,7 +10,7 @@ class _organizerPageState extends State<organizerPage> {
 
   List<String> coll= ["Create New Event","Manage Existing Event","View Profile"];
   List<String> img= ["assets/newevent.png","assets/img2.png","assets/profile.jpg"];
-  List<String> navi=["/newevent","/manageevent","/orgprofile"];
+  List<String> navi=["/newevent","/manageevent","/viewprofile"];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
@@ -31,7 +31,6 @@ class _organizerPageState extends State<organizerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.grey[200],
        body: SafeArea(
          child: Padding(
            padding: const EdgeInsets.symmetric(vertical: 30.0),
@@ -163,7 +162,7 @@ class _organizerPageState extends State<organizerPage> {
             DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 166, 22, 92),
+                color: Colors.amberAccent,
               ),
             ),
             ListTile(
@@ -185,7 +184,7 @@ class _organizerPageState extends State<organizerPage> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Theme.of(context).primaryColor,
         items: [
          BottomNavigationBarItem(
            icon: Icon(Icons.arrow_back),

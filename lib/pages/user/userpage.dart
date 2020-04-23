@@ -8,28 +8,65 @@ class userPage extends StatefulWidget {
 }
 
 class _userPageState extends State<userPage> {
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    if(index==0)
+    {
+      Navigator.pop(context);
+    }
+    else if(index==1)
+    {
+      //Navigator.popAndPushNamed(context, '/');
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-         backgroundColor: Color.fromARGB(255, 74, 22, 60),
-         title: Text("UserPage"),
-         centerTitle: true,
+      key: _scaffoldKey,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30.0),
+          child: ListView(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  SizedBox(width: 5.0),
+                  GestureDetector(
+                    onTap: (){
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                    child: Icon(
+                      Icons.dehaze,
+                      size: 35.0,
+                    ),
+                  ),
+                  SizedBox(width: 15.0),
+                  Text(
+                    "EVENT'S PAGE",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
       drawer : Drawer(
-
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header',
-              style: TextStyle(color: Colors.white),),
+              child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 166, 22, 92),
+                color: Colors.amberAccent,
               ),
             ),
             ListTile(
@@ -49,20 +86,24 @@ class _userPageState extends State<userPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
 
-        backgroundColor: Color.fromARGB(255, 166, 22, 92),
-        onPressed: (){
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.white ,
-        ),
-        label: Text("BACK",
-        style: TextStyle(color: Colors.white),
-
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.arrow_back),
+            title: Text("Back"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text("Home"),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.indigo,
+        onTap: _onItemTapped,
       ),
-    ));
+    );
   }
+
 }

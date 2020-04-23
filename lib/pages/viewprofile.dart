@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CreateProfile extends StatefulWidget {
+class ViewProfile extends StatefulWidget {
   @override
-  _CreateProfileState createState() => _CreateProfileState();
+  _ViewProfileState createState() => _ViewProfileState();
 }
 
-class _CreateProfileState extends State<CreateProfile> {
-  @override
+class _ViewProfileState extends State<ViewProfile> {
+
+	int _selectedIndex = 0;
+	void _onItemTapped(int index) {
+		if(index==0)
+		{
+			Navigator.pop(context);
+		}
+		else if(index==1)
+		{
+			//Navigator.popAndPushNamed(context, '/');
+			Navigator.pop(context);
+		}
+	}
+
+
+	@override
   Widget build(BuildContext context) {
     return Scaffold(
 			appBar: AppBar(
@@ -20,27 +35,6 @@ class _CreateProfileState extends State<CreateProfile> {
 					child: Column(
 						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 						children: <Widget>[
-//							TitleRow(title: 'Profile',
-//								trailing: CircleAvatar(
-//									backgroundColor: kThemeColor,
-//									child: GestureDetector(
-//										onTap: (){
-//											if(phoneNumber!=null&&gender!=null) {
-//												setState(() {
-//													savingData =true;
-//												});
-//												registerUserInDatabase();
-//											}
-//											else{
-//												Fluttertoast.showToast(msg: 'Please Select Gender and Enter Phone Number');
-//											}
-//										},
-//										child: Icon(
-//											Icons.save,
-//											color: Colors.white,
-//										),
-//									),
-//								),),
 							Flexible(
 								child: CircleAvatar(
 									radius: 45,
@@ -91,11 +85,7 @@ class _CreateProfileState extends State<CreateProfile> {
 												child: GestureDetector(
 													onTap: (){
 														setState(() {
-//															gender=kMale;
-//															maleSelected=true;
-//															femaleSelected=false;
 														});
-//														Fluttertoast.showToast(msg: 'Male Selected',toastLength: Toast.LENGTH_SHORT);
 													},
 													child: Container(
 														child: Icon(
@@ -116,12 +106,8 @@ class _CreateProfileState extends State<CreateProfile> {
 												padding: const EdgeInsets.all(8.0),
 												child: GestureDetector(
 													onTap: (){
-														setState(() {
-//															gender=kFemale;
-//															maleSelected=false;
-//															femaleSelected=true;
+														setState(() {;
 														});
-													//	Fluttertoast.showToast(msg: 'Female Selected',toastLength: Toast.LENGTH_SHORT);
 													},
 													child: Container(
 														child: Icon(
@@ -138,7 +124,6 @@ class _CreateProfileState extends State<CreateProfile> {
 													),
 												),
 											),
-
 										],
 									),
 								],
@@ -181,37 +166,25 @@ class _CreateProfileState extends State<CreateProfile> {
 									],
 								),
 							),
-							Expanded(
-								flex: 2,
-								child: Row(
-									children: <Widget>[
-										Column(
-											mainAxisAlignment: MainAxisAlignment.center,
-											children: <Widget>[
-												Text('Referral Roll No',style: TextStyle(fontSize: 16,color: Colors.grey),),
-												Text('(Optional)',style: TextStyle(fontSize: 12,color: Colors.grey),),
-											],
-										),
-										SizedBox(width: 10,),
-										Expanded(
-											child: Container(
-												color: Colors.grey[200],
-												child: TextField(
-													textAlign: TextAlign.center,
-													onChanged: (value){
-														setState(() {
-															//referral = value;
-														});
-													},
-													style: TextStyle(fontSize: 18,color: Colors.grey[500],fontWeight: FontWeight.w700),),
-											),
-										)
-									],
-								),
-							),
 						],
 					),
 				),
+			),
+			bottomNavigationBar: BottomNavigationBar(
+				backgroundColor: Theme.of(context).primaryColor,
+				items: [
+					BottomNavigationBarItem(
+						icon: Icon(Icons.arrow_back),
+						title: Text("Back"),
+					),
+					BottomNavigationBarItem(
+						icon: Icon(Icons.home),
+						title: Text("Home"),
+					),
+				],
+				currentIndex: _selectedIndex,
+				selectedItemColor: Colors.indigo,
+				onTap: _onItemTapped,
 			),
 		);
   }
