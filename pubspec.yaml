@@ -55,7 +55,7 @@ flutter:
     - assets/backtexture.png
     - assets/loginback.jpg
     - assets/profile.jpg
-    - images/
+    - assets/party4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

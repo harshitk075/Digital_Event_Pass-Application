@@ -16,7 +16,7 @@ void main() => runApp(MaterialApp(
      brightness: Brightness.dark,
      primaryColor: Color.fromARGB(255, 74, 22, 60),
     scaffoldBackgroundColor: Color.fromARGB(255, 74, 22, 60),
-    accentColor: Color.fromARGB(255, 166, 22, 92)
+    accentColor: Color.fromARGB(255, 166, 22, 92),
    ),
    initialRoute: "/",
    routes: {

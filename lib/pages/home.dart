@@ -21,7 +21,7 @@ class _homeState extends State<home> {
             child: Container(
 
               margin: EdgeInsets.fromLTRB(0,100,0,0),
-              child: Image.asset('images/party4.png'),
+              child: Image.asset('assets/party4.png'),
     ),
           ),
     ),
@@ -47,7 +47,7 @@ class _homeState extends State<home> {
                       Navigator.pushNamed(context, "/organizerPage");
                     },
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(30, 15, 15, 15),
+                      padding: EdgeInsets.fromLTRB(30, 15, 0.0, 10),
                       height:100.0,
                       child :Row(
                           children: <Widget>[Icon(Icons.business_center, size: 70,
@@ -55,7 +55,7 @@ class _homeState extends State<home> {
                             SizedBox(
                               width: 15.0,
                             ),
-                            Text('ORGANIZE AN EVENT', style: TextStyle(
+                            Text('ORGANIZE AN \nEVENT', style: TextStyle(
                                 color: Colors.brown[800],
                                 fontWeight: FontWeight.w800,
                                 fontSize: 20

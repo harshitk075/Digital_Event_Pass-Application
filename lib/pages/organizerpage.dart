@@ -30,15 +30,6 @@ class _organizerPageState extends State<organizerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-         backgroundColor: Color.fromARGB(255, 74, 22, 60),
-         title: Row(
-           children: <Widget>[
-             Text("Organizer Home Page"),
-           ],
-         ),
-         centerTitle: true,
-      ),
       key: _scaffoldKey,
       backgroundColor: Colors.grey[200],
        body: SafeArea(
@@ -192,21 +183,7 @@ class _organizerPageState extends State<organizerPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
 
-        backgroundColor: Color.fromARGB(255, 166, 22, 92),
-        onPressed: (){
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.white ,
-        ),
-        label: Text("BACK",
-          style: TextStyle(color: Colors.white),
-
-        ),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.lightBlueAccent,
         items: [
