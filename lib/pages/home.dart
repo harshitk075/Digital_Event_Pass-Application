@@ -16,15 +16,16 @@ class _homeState extends State<home> {
     return SafeArea(
       child: Stack(
         children: <Widget>[ Scaffold(
+          backgroundColor: Colors.grey[100],
           body: Align(
             alignment: FractionalOffset.bottomCenter,
             child: Container(
+              alignment: Alignment.bottomCenter,
 
-              margin: EdgeInsets.fromLTRB(0,100,0,0),
-              child: Image.asset('assets/party4.png'),
-    ),
+              child: Image.asset('assets/homeback.png'),
+            ),
           ),
-    ),
+       ),
           CustomPaint(
             size: Size(_screenWidth,_screenHeight),
             painter: ShapePainter(),
@@ -39,7 +40,7 @@ class _homeState extends State<home> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  color: Colors.orangeAccent,
+                  color: Theme.of(context).accentColor,
                   elevation: 6,
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
@@ -70,7 +71,7 @@ class _homeState extends State<home> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  color: Colors.orangeAccent,
+                  color: Theme.of(context).accentColor,
                   elevation: 6,
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
@@ -111,7 +112,7 @@ class ShapePainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
 
-    paint.color= Color.fromARGB(255, 166, 22, 92);
+    paint.color= Colors.blue[300];
     paint.style= PaintingStyle.fill;
     var path = Path();
 

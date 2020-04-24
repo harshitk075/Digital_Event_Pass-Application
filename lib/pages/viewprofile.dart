@@ -171,7 +171,7 @@ class _ViewProfileState extends State<ViewProfile> {
 				),
 			),
 			bottomNavigationBar: BottomNavigationBar(
-				backgroundColor: Theme.of(context).primaryColor,
+				backgroundColor: Theme.of(context).accentColor,
 				items: [
 					BottomNavigationBarItem(
 						icon: Icon(Icons.arrow_back),

@@ -8,13 +8,12 @@ class CreateNewEvent extends StatefulWidget {
 
 class _CreateNewEventState extends State<CreateNewEvent> {
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage("assets/backtexture.png"),
+        image: AssetImage("assets/backsm2.jpg"),
         fit: BoxFit.cover,
           ),
         ),
@@ -101,6 +100,20 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                            labelText: 'Veneue',
                          ),
                        ),
+                       SizedBox(height: 20.0),
+                       Card(
+                           color: Colors.grey[200],
+                           child: Padding(
+                             padding: EdgeInsets.all(8.0),
+                             child: TextField(
+                               maxLines: 8,
+                               decoration: InputDecoration.collapsed(hintText: "Add Event Description"),
+                             ),
+                           )
+                       ),
+                       Card(
+
+                       )
                      ],
                    ),
                ),

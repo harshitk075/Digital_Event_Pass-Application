@@ -24,9 +24,11 @@ class _ManageEventState extends State<ManageEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Text("manage event page")),
+      body: ListView(
+
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Theme.of(context).accentColor,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.arrow_back),

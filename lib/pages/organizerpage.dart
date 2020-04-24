@@ -31,34 +31,35 @@ class _organizerPageState extends State<organizerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-       body: SafeArea(
-         child: Padding(
-           padding: const EdgeInsets.symmetric(vertical: 30.0),
-           child: ListView(
-             children: <Widget>[
-               Row(
-                 children: <Widget>[
-                   SizedBox(width: 5.0),
-                   GestureDetector(
-                     onTap: (){
-                       _scaffoldKey.currentState.openDrawer();
-                     },
-                     child: Icon(
-                       Icons.dehaze,
-                       size: 35.0,
-                     ),
-                   ),
-                   SizedBox(width: 15.0),
-                   Text(
-                       "EVENT ORGANIZER",
-                       style: TextStyle(
-                       fontSize: 30.0,
-                       fontWeight: FontWeight.bold,
-                       ),
-                     ),
-                 ],
-               ),
-               SizedBox(height: 60.0),
+      backgroundColor: Colors.grey[200],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30.0),
+          child: ListView(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  SizedBox(width: 5.0),
+                  GestureDetector(
+                    onTap: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                    child: Icon(
+                      Icons.dehaze,
+                      size: 35.0,
+                    ),
+                  ),
+                  SizedBox(width: 15.0),
+                  Text(
+                    "EVENT ORGANIZER",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 60.0),
               Column(
                 children: <Widget>[
                   Padding(
@@ -67,11 +68,11 @@ class _organizerPageState extends State<organizerPage> {
                       children: <Widget>[
                         Text(
                           "choose your action",
-                           style: TextStyle(
-                             fontWeight: FontWeight.bold,
-                             fontSize: 18.0,
-                             letterSpacing: 1.5,
-                           ),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            letterSpacing: 1.5,
+                          ),
                         )
                       ],
                     ),
@@ -80,12 +81,12 @@ class _organizerPageState extends State<organizerPage> {
                   Container(
                     height: 300.0,
                     child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.horizontal,
                         itemCount: coll.length,
-                        itemBuilder: (BuildContext ctx,int idx){
+                        itemBuilder: (BuildContext ctx, int idx) {
                           return GestureDetector(
-                            onTap: (){
-                            Navigator.pushNamed(context, navi[idx]);
+                            onTap: () {
+                              Navigator.pushNamed(context, navi[idx]);
                             },
                             child: Container(
                               margin: EdgeInsets.all(10.0),
@@ -93,53 +94,62 @@ class _organizerPageState extends State<organizerPage> {
                               child: Stack(
                                 alignment: Alignment.topCenter,
                                 children: <Widget>[
-                                Positioned(
-                                  bottom : 15.0,
-                                  child: Container(
-                                    width: 200.0,
-                                    height: 120.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: <Widget>[
-                                          Text(
-                                             coll[idx],
-                                             style: TextStyle(
-                                               fontSize: 22.0,
-                                             ),
-                                          )
-                                        ],
+                                  Positioned(
+                                    bottom: 15.0,
+                                    child: Container(
+                                      width: 200.0,
+                                      height: 120.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(
+                                            10.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            10.0, 5.0, 10.0, 5.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .center,
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .end,
+                                          children: <Widget>[
+                                            Text(
+                                              coll[idx],
+                                              style: TextStyle(
+                                                fontSize: 22.0,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20.0),
-                                  boxShadow: [BoxShadow(
-                                      color: Colors.black26,
-                                      offset: Offset(0.0,2.0),
-                                       blurRadius: 6.0,
-                                  )],
-                                  ),
-                                  child: Stack(
-                                    children: <Widget>[
-                                         ClipRRect(
-                                           borderRadius :BorderRadius.circular(20.0),
-                                           child: Image(height: 180.0,width: 180.0,
-                                           image: AssetImage(img[idx]),
-                                           fit: BoxFit.cover,
-                                           ),
-                                         ),
-                                    ],
-                                  ),
-                                )
-                              ],),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      boxShadow: [BoxShadow(
+                                        color: Colors.black26,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 6.0,
+                                      )
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: <Widget>[
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              20.0),
+                                          child: Image(
+                                            height: 180.0, width: 180.0,
+                                            image: AssetImage(img[idx]),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],),
                             ),
                           );
                         }
@@ -147,11 +157,11 @@ class _organizerPageState extends State<organizerPage> {
                   ),
                 ],
               )
-             ],
-           ),
-         ),
-       ),
-      drawer : Drawer(
+            ],
+          ),
+        ),
+      ),
+      drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
         // space to fit everything.
@@ -162,7 +172,7 @@ class _organizerPageState extends State<organizerPage> {
             DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Colors.amberAccent,
+                color: Theme.of(context).accentColor,
               ),
             ),
             ListTile(
@@ -184,12 +194,12 @@ class _organizerPageState extends State<organizerPage> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).accentColor,
         items: [
-         BottomNavigationBarItem(
-           icon: Icon(Icons.arrow_back),
-           title: Text("Back"),
-         ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.arrow_back),
+            title: Text("Back"),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text("Home"),
@@ -199,7 +209,6 @@ class _organizerPageState extends State<organizerPage> {
         selectedItemColor: Colors.indigo,
         onTap: _onItemTapped,
       ),
-      );
+    );
   }
-
 }

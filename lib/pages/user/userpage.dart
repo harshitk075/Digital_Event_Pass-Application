@@ -66,7 +66,7 @@ class _userPageState extends State<userPage> {
             DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Colors.amberAccent,
+                color: Theme.of(context).accentColor,
               ),
             ),
             ListTile(
@@ -88,7 +88,7 @@ class _userPageState extends State<userPage> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).accentColor,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.arrow_back),

@@ -12,9 +12,9 @@ import 'package:digitaleventpass/pages/user/userpage.dart';
 void main() => runApp(MaterialApp(
   title: "Digital Event Pass",
    theme: ThemeData(
-     primaryColor: Colors.lightBlueAccent,
+     primaryColor: Colors.cyan[300],
      scaffoldBackgroundColor: Colors.grey[200],
-     accentColor: Colors.orangeAccent,
+     accentColor: Colors.blue[400],
    ),
    initialRoute: "/",
    routes: {
