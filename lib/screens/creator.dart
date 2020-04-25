@@ -33,6 +33,7 @@ class eventCreator extends StatelessWidget{
                       fillColor: Color(0xFFE0F7FA),
                       filled: true,
                       border: OutlineInputBorder(
+                         borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         borderSide: BorderSide(
                           color:Color(0xFFE0F7FA),
                         )
@@ -52,6 +53,7 @@ class eventCreator extends StatelessWidget{
                       fillColor: Color(0xFFE0F7FA),
                       filled: true,
                       border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         borderSide: BorderSide(
                           color:Color(0xFFE0F7FA),
                         )
@@ -72,6 +74,8 @@ class eventCreator extends StatelessWidget{
                     width:80,
                     child: RaisedButton(
                       color: Color(0xFF009688),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
                       onPressed: () {},
                       child: Text("Log In",style:TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500),),
                     ),

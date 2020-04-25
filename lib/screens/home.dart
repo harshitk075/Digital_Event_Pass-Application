@@ -22,7 +22,7 @@ Widget build(BuildContext context){
                     height: 60.0,
                     width:200.0,
                     child:RaisedButton(
-                      onPressed: () => Navigator.pushNamed(context, "/creator"),
+                      onPressed: () => Navigator.pushNamed(context, "/event"),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
