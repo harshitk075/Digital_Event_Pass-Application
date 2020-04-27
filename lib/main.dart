@@ -1,3 +1,4 @@
+import 'package:digitaleventpass/pages/qr_utilitty.dart';
 import 'package:digitaleventpass/pages/viewprofile.dart';
 import 'package:digitaleventpass/pages/loginpage.dart';
 import 'package:digitaleventpass/pages/createnewevent.dart';
@@ -27,6 +28,7 @@ void main() => runApp(MaterialApp(
      "/createprofile" : (context)=> ViewProfile(),
      "/showprofile"   : (context)=> ShowProfile(),
      "/viewprofile"   : (context)=> ViewProfile(),
+     "/qrutility"    :  (context) => QrUtility(),
    },
 ));
 

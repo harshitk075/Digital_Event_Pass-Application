@@ -20,7 +20,9 @@ class _QrUtilityState extends State<QrUtility> {
 	}
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Scaffold(
+
+			body: Stack(
 			alignment: Alignment.center,
 			children: <Widget>[
 				QRCaptureView(controller: _captureController),
@@ -29,7 +31,7 @@ class _QrUtilityState extends State<QrUtility> {
 					child: _buildToolBar(),
 				)
 			],
-		);
+		),);
   }
 	Widget _buildToolBar() {
 		return Row(

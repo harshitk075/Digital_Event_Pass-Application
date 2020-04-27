@@ -32,6 +32,10 @@ dependencies:
   flappy_search_bar: ^1.7.2
   qrcode: ^1.0.4
   font_awesome_flutter: ^8.8.1
+  animated_text_kit: ^2.0.0
+  intl: ^0.16.1
+  qr_flutter: ^3.2.0
+  image_picker: ^0.6.5+2
 
 dev_dependencies:
   flutter_test:
