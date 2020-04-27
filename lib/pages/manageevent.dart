@@ -1,5 +1,6 @@
+import 'package:digitaleventpass/pages/qr_utilitty.dart';
 import 'package:flutter/material.dart';
-
+import 'package:qr_flutter/qr_flutter.dart';
 class ManageEvent extends StatefulWidget {
   @override
   _ManageEventState createState() => _ManageEventState();
@@ -24,7 +25,18 @@ class _ManageEventState extends State<ManageEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+
+          FlatButton(
+            child: Text("SCAN TICKET"),
+            onPressed:() {
+           Navigator.pushNamed(context, "/qrutility") ;
+            },
+          )
+        ],
 
       ),
       bottomNavigationBar: BottomNavigationBar(

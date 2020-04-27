@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateNewEvent extends StatefulWidget {
   @override
@@ -7,6 +9,14 @@ class CreateNewEvent extends StatefulWidget {
 }
 
 class _CreateNewEventState extends State<CreateNewEvent> {
+  File _image;
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +38,22 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.add_a_photo,
-                    size: 50.0,
-                  ),
-                  Text("Upload photo"),
-                ],
+              child: InkWell(
+                onTap: () {
+                  getImage();
+                  print("$_image");
+                }
+                ,
+                child: _image == null ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.add_a_photo,
+                      size: 50.0,
+                    ),
+                    Text("Upload photo"),
+                  ],
+                ): Image.file(_image),
               )
             ),
             SizedBox(height: 10.0),

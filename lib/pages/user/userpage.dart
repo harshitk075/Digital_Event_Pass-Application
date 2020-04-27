@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flappy_search_bar/scaled_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
+import 'package:digitaleventpass/pages/user/columntemplate.dart';
+import 'package:digitaleventpass/pages/user/eventcard.dart';
+import 'package:intl/intl.dart';
 import 'package:digitaleventpass/post_class.dart';
 class userPage extends StatefulWidget {
   @override
@@ -10,8 +14,10 @@ class userPage extends StatefulWidget {
 class _userPageState extends State<userPage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _firestore = Firestore.instance;
   int _selectedIndex = 0;
 
+  List<EventCard> eventList = [];
   void _onItemTapped(int index) {
     if(index==0)
     {
@@ -25,40 +31,50 @@ class _userPageState extends State<userPage> {
   }
 
   @override
+  void initState() {
+    fetchUpdates();
+  }
+
+  void fetchUpdates() async{
+
+    await for(var snapshot in _firestore.collection('events').orderBy('createdAt', descending: true).snapshots())
+    {
+      List<EventCard> newUpdatesList = [];
+      for(var message in snapshot.documents)
+      {
+        String msg,event,displayDate;
+        msg = message.data['venue']??'Message Text Unavailable';
+        event=message.data['event']??'Event Unavailable';
+
+        int timestamp = message.data['createdAt']??1580187210337;
+        var date = new DateTime.fromMillisecondsSinceEpoch(timestamp);
+        displayDate=DateFormat("dd MMM yyyy hh:mm a").format(date).toString();
+
+        newUpdatesList.add(EventCard(event: event,date: displayDate, venue: msg,));
+      }
+      setState(() {
+        eventList = newUpdatesList;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30.0),
-          child: ListView(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  SizedBox(width: 5.0),
-                  GestureDetector(
-                    onTap: (){
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                    child: Icon(
-                      Icons.dehaze,
-                      size: 35.0,
-                    ),
-                  ),
-                  SizedBox(width: 15.0),
-                  Text(
-                    "EVENT'S PAGE",
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+        child: ColumnTemplate(
+      columnTitle: 'Events',
+      childWidget: Expanded(
+        child: Container(
+          child: ListView.builder(
+            itemCount: eventList.length,
+            itemBuilder: (BuildContext context,int index){
+              return eventList[index];
+            },
           ),
         ),
-      ),
+      ),),),
       drawer : Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
