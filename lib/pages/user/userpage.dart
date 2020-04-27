@@ -3,7 +3,7 @@ import 'package:flappy_search_bar/scaled_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:digitaleventpass/pages/user/columntemplate.dart';
-import 'package:digitaleventpass/pages/user/eventcard.dart';
+import 'package:digitaleventpass/pages/eventcard.dart';
 import 'package:intl/intl.dart';
 import 'package:digitaleventpass/post_class.dart';
 class userPage extends StatefulWidget {
@@ -64,10 +64,10 @@ class _userPageState extends State<userPage> {
       key: _scaffoldKey,
       body: SafeArea(
         child: ColumnTemplate(
-      columnTitle: 'Events',
-      childWidget: Expanded(
-        child: Container(
-          child: ListView.builder(
+         columnTitle: 'Events',
+         childWidget: Expanded(
+          child: Container(
+           child: ListView.builder(
             itemCount: eventList.length,
             itemBuilder: (BuildContext context,int index){
               return eventList[index];

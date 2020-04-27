@@ -42,8 +42,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                 onTap: () {
                   getImage();
                   print("$_image");
-                }
-                ,
+                },
                 child: _image == null ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
