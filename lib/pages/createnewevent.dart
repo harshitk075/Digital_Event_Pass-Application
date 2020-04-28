@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:digitaleventpass/date_time_picker.dart';
+import 'package:digitaleventpass/pages/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +19,8 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   String _venue;
   String _imageUrl;
   DateTime _time;
+  double _duration;
+  EventType _eventType;
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -24,6 +28,11 @@ class _CreateNewEventState extends State<CreateNewEvent> {
     setState(() {
       _image = image;
     });
+  }
+  void takedate(DateTime value){
+      print("takedate working prroperly");
+      _time = value;
+      print(_time);
   }
 
   @override
@@ -96,6 +105,11 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                            hintText: 'Enter Event Name',
                            labelText: 'Event Name',
                          ),
+                         onChanged: (value){
+                           setState(() {
+                             _name = value;
+                           });
+                         },
                        ),
                        TextFormField(
                          decoration: const InputDecoration(
@@ -103,20 +117,34 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                            hintText: 'Enter type of event to organize',
                            labelText: 'Event Type',
                          ),
+                         onChanged: (value){
+                           setState(() {
+                             _description = value;
+                           });
+                         },
                        ),
-                       TextFormField(
-                         decoration: const InputDecoration(
-                           icon: const Icon(Icons.date_range),
-                           hintText: 'Enter Event Date',
-                           labelText: 'Event Date',
-                         ),
-                       ),
+//                       TextFormField(
+//                         decoration: const InputDecoration(
+//                           icon: const Icon(Icons.date_range),
+//                           hintText: 'Enter Event Date',
+//                           labelText: 'Event Date',
+//                         ),
+//                       ),
+                     BasicDateTimeField(
+                      onChng: takedate,
+                     ),
                        TextFormField(
                          decoration: const InputDecoration(
                            icon: const Icon(Icons.timelapse),
-                           hintText: 'Enter time of event',
-                           labelText: 'Timing',
+                           hintText: 'Enter duration of event',
+                           labelText: 'Duration in minutes',
                          ),
+                         keyboardType: TextInputType.number,
+                           onChanged: (value){
+                             setState(() {
+                               _duration = double.parse(value);
+                             });
+                           },
                        ),
                        TextFormField(
                          decoration: const InputDecoration(
@@ -133,6 +161,11 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                              child: TextField(
                                maxLines: 8,
                                decoration: InputDecoration.collapsed(hintText: "Add Event Description"),
+                               onChanged: (value){
+                                 setState(() {
+                                   _description = value;
+                                 });
+                               },
                              ),
                            )
                        ),

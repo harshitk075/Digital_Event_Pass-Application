@@ -59,7 +59,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 						child: ListTile(
 							title: Text(post.title),
 							isThreeLine: true,
-							subtitle: Text(post.body),
+							subtitle: Text(post.eventDescription),
 							onTap: () {
 //                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
 							},
