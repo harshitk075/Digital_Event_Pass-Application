@@ -26,24 +26,15 @@ class _ViewProfileState extends State<ViewProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
 			appBar: AppBar(
-				title: Text("Create Profile"),
-
+				title: Text("View Profile"),
 			),
-			body: Container(
-				child: Padding(
-					padding:  EdgeInsets.only(left: 8,right: 8,top: 32,bottom: 8),
-					child: Column(
-						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-						children: <Widget>[
-							Flexible(
-								child: CircleAvatar(
-									radius: 45,
-									child: ClipRRect(
-										borderRadius: BorderRadius.circular(55),
-										child: Image.network("https://avatars0.githubusercontent.com/u/45289002?s=400&u=b16c25f2f53e1bd99cdd812198df21b9a20a596f&v=4"),
-									),
-								),
+			body: ListView(
+				children: <Widget>[
+					CircleAvatar(
+								backgroundImage: NetworkImage("https://avatars1.githubusercontent.com/u/47221273?s=460&u=e86600f2266d871277b266cd11092f9778f4c496&v=4"),
+								maxRadius: 100.0,
 							),
+							SizedBox(height: 30.0,),
 							Center(child: Text("Shreyansh",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
 							Row(
 								mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,7 +147,7 @@ class _ViewProfileState extends State<ViewProfile> {
 														keyboardType: TextInputType.number,
 														onChanged: (value){
 															setState(() {
-															//	phoneNumber=value;
+																//	phoneNumber=value;
 															});
 														},
 														style: TextStyle(fontSize: 18,color: Colors.grey[700],fontWeight: FontWeight.bold),),
@@ -167,8 +158,6 @@ class _ViewProfileState extends State<ViewProfile> {
 								),
 							),
 						],
-					),
-				),
 			),
 			bottomNavigationBar: BottomNavigationBar(
 				backgroundColor: Theme.of(context).accentColor,
