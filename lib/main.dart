@@ -1,3 +1,4 @@
+import 'package:digitaleventpass/pages/createorganizerprofile.dart';
 import 'package:digitaleventpass/pages/display_event.dart';
 import 'package:digitaleventpass/pages/qr_utilitty.dart';
 import 'package:digitaleventpass/pages/user/ticket_template.dart';
@@ -33,6 +34,7 @@ void main() => runApp(MaterialApp(
      "/qrutility"     : (context)=> QrUtility(),
      "/ticketshow"    : (context)=> Ticket(),
      "/eventdisplay"   : (context)=> EventDisplay(),
+     "/createorgprofile": (context)=> CreateOrganizerProfile() ,
    },
 ));
 
