@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:digitaleventpass/post_class.dart';
 
 class CreateNewEvent extends StatefulWidget {
   @override
@@ -10,6 +11,13 @@ class CreateNewEvent extends StatefulWidget {
 
 class _CreateNewEventState extends State<CreateNewEvent> {
   File _image;
+  Post _event;
+  String _name;
+  String _description;
+  String _venue;
+  String _imageUrl;
+  DateTime _time;
+
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
