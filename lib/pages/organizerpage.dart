@@ -108,15 +108,16 @@ class _organizerPageState extends State<organizerPage> {
                                         padding: EdgeInsets.fromLTRB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .center,
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .end,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
-                                            Text(
-                                              coll[idx],
-                                              style: TextStyle(
-                                                fontSize: 22.0,
+                                            SizedBox(height: 10.0,),
+                                            Flexible(
+                                              child: Text(
+                                                coll[idx],
+                                                style: TextStyle(
+                                                  fontSize: 22.0,
+                                                ),
                                               ),
                                             )
                                           ],

@@ -19,7 +19,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/eventdisplay",
+   initialRoute: "/",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
