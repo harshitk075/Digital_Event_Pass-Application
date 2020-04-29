@@ -21,27 +21,21 @@ class _EventUpdationsState extends State<EventUpdations> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("MANAGE EVENT",style: TextStyle(fontSize: 25.0,letterSpacing: 2.0),),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        elevation: 10.0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+        padding: const EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 0.0),
         child: ListView(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-               Center(
-                 child: Text(
-                   "MANAGE EVENT",
-                   style: TextStyle(
-                     fontWeight: FontWeight.bold,
-                     fontSize: 30.0,
-                     letterSpacing: 2.0,
-                   ),
-                 ),
-               ),
-               Divider(thickness: 2.0,),
-               SizedBox(height: 30.0,),
                GestureDetector(
                  onTap: (){
                    Navigator.pushNamed(context, "/qrutility");
