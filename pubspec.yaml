@@ -66,6 +66,10 @@ flutter:
     - assets/backsm2.jpg
     - assets/homeback.png
     - assets/backsm1.jpg
+    - assets/party.jpg
+    - assets/qrscan.jpg
+    - assets/list.png
+    - assets/change_profile.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

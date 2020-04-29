@@ -3,7 +3,7 @@ import 'package:flappy_search_bar/scaled_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:digitaleventpass/pages/user/columntemplate.dart';
-import 'package:digitaleventpass/pages/user/eventcard.dart';
+import 'package:digitaleventpass/pages/eventcard.dart';
 import 'package:intl/intl.dart';
 import 'package:digitaleventpass/post_class.dart';
 class userPage extends StatefulWidget {
@@ -36,10 +36,10 @@ class _userPageState extends State<userPage> {
   }
 
   void fetchUpdates() async{
-
     await for(var snapshot in _firestore.collection('events').orderBy('createdAt', descending: true).snapshots())
     {
       List<EventCard> newUpdatesList = [];
+      print(snapshot.documents.length);
       for(var message in snapshot.documents)
       {
         String msg,event,displayDate;
@@ -49,7 +49,7 @@ class _userPageState extends State<userPage> {
         int timestamp = message.data['createdAt']??1580187210337;
         var date = new DateTime.fromMillisecondsSinceEpoch(timestamp);
         displayDate=DateFormat("dd MMM yyyy hh:mm a").format(date).toString();
-
+        //print(msg+" "+ event+" "+ displayDate);
         newUpdatesList.add(EventCard(event: event,date: displayDate, venue: msg,));
       }
       setState(() {
@@ -64,41 +64,73 @@ class _userPageState extends State<userPage> {
       key: _scaffoldKey,
       body: SafeArea(
         child: ColumnTemplate(
-      columnTitle: 'Events',
-      childWidget: Expanded(
-        child: Container(
-          child: ListView.builder(
+         columnTitle: 'Events',
+         childWidget: Expanded(
+          child: Container(
+           child: ListView.builder(
             itemCount: eventList.length,
             itemBuilder: (BuildContext context,int index){
               return eventList[index];
             },
           ),
+          ),
+         ),
         ),
-      ),),),
-      drawer : Drawer(
+      ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
         child: ListView(
+          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Hi ##NAMEorganizer",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ],
+              ),
               decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
+                  image: DecorationImage(
+                    image: AssetImage("assets/party.jpg"),
+                    fit: BoxFit.cover,
+                  )
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('SET PROFILE'),
               onTap: () {
-                // Update the state of the app.
                 Navigator.pop(context);
+                Navigator.pushNamed(context, "/createorgprofile");
               },
             ),
+            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
             ListTile(
-              title: Text('Item 2'),
+              title: Text('SETTINGS'),
               onTap: () {
                 // Update the state of the app.
                 Navigator.pop(context);
               },
             ),
+            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
+            ListTile(
+              title: Text('LOG OUT'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.pop(context);
+              },
+            ),
+            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
           ],
         ),
       ),

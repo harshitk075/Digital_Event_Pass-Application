@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:digitaleventpass/pages/guest_class.dart';
 
 class organizerPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _organizerPageState extends State<organizerPage> {
   List<String> navi=["/newevent","/manageevent","/viewprofile"];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -108,15 +110,16 @@ class _organizerPageState extends State<organizerPage> {
                                         padding: EdgeInsets.fromLTRB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .center,
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .end,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
-                                            Text(
-                                              coll[idx],
-                                              style: TextStyle(
-                                                fontSize: 22.0,
+                                            SizedBox(height: 10.0,),
+                                            Flexible(
+                                              child: Text(
+                                                coll[idx],
+                                                style: TextStyle(
+                                                  fontSize: 22.0,
+                                                ),
                                               ),
                                             )
                                           ],
@@ -170,25 +173,51 @@ class _organizerPageState extends State<organizerPage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Hi ##NAMEorganizer",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ],
+              ),
               decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
+                image: DecorationImage(
+                  image: AssetImage("assets/party.jpg"),
+                  fit: BoxFit.cover,
+                )
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('SET PROFILE'),
               onTap: () {
-                // Update the state of the app.
                 Navigator.pop(context);
+                Navigator.pushNamed(context, "/createorgprofile");
               },
             ),
+            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
             ListTile(
-              title: Text('Item 2'),
+              title: Text('SETTINGS'),
               onTap: () {
                 // Update the state of the app.
                 Navigator.pop(context);
               },
             ),
+            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
+            ListTile(
+              title: Text('LOG OUT'),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.pop(context);
+              },
+            ),
+            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
           ],
         ),
       ),
