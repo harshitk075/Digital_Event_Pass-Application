@@ -96,11 +96,3 @@ class _ManageEventState extends State<ManageEvent> {
     );
   }
 }
-
-
-//FlatButton(
-//child: Text("SCAN TICKET"),
-//onPressed:() {
-//Navigator.pushNamed(context, "/qrutility") ;
-//},
-//)

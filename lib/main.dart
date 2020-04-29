@@ -1,5 +1,6 @@
 import 'package:digitaleventpass/pages/createorganizerprofile.dart';
 import 'package:digitaleventpass/pages/display_event.dart';
+import 'package:digitaleventpass/pages/eventupdations.dart';
 import 'package:digitaleventpass/pages/qr_utilitty.dart';
 import 'package:digitaleventpass/pages/user/ticket_template.dart';
 import 'package:digitaleventpass/pages/viewprofile.dart';
@@ -20,7 +21,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/",
+    initialRoute: "/eventupdations",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
@@ -34,7 +35,8 @@ void main() => runApp(MaterialApp(
      "/qrutility"     : (context)=> QrUtility(),
      "/ticketshow"    : (context)=> Ticket(),
      "/eventdisplay"   : (context)=> EventDisplay(),
-     "/createorgprofile": (context)=> CreateOrganizerProfile() ,
+     "/createorgprofile": (context)=> CreateOrganizerProfile(),
+     "/eventupdations":  (context)=>EventUpdations(),
    },
 ));
 

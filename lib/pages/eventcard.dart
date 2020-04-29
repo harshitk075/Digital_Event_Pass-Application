@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class EventCard extends StatelessWidget {
 
 	final String date,event,venue;
@@ -6,20 +7,22 @@ class EventCard extends StatelessWidget {
 	EventCard({this.date,this.event,this.venue});
   @override
   Widget build(BuildContext context) {
-    return Card(
-			elevation: 10.0,
-			child: InkWell(
-				splashColor: Colors.blue.withAlpha(30),
-				onTap: () {
-
-				},
-				child: Container(
-					width: 300,
-					height: 300,
-					decoration: BoxDecoration(
+    return Padding(
+       padding: const EdgeInsets.all(10.0),
+       child: Card(
+			 elevation: 10.0,
+			  child: InkWell(
+				 splashColor: Colors.blue.withAlpha(30),
+				 onTap: () {
+            // Navigator.pushNamed(context, );
+				 },
+					child: Container(
+				 	  width: 300,
+						height: 300,
+				  	decoration: BoxDecoration(
 						color: Colors.blueGrey[100],
 					),
-					child: Padding(
+					 child: Padding(
 					  padding: const EdgeInsets.all(10.0),
 					  child: Column(
 							crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,6 +68,7 @@ class EventCard extends StatelessWidget {
 					),
 				),
 			),
-		);
+		),
+    );
   }
 }

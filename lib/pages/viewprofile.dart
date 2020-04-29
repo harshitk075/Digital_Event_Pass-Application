@@ -8,6 +8,8 @@ class ViewProfile extends StatefulWidget {
 
 class _ViewProfileState extends State<ViewProfile> {
 
+	String gender= "male";
+
 	int _selectedIndex = 0;
 	void _onItemTapped(int index) {
 		if(index==0)
@@ -21,7 +23,6 @@ class _ViewProfileState extends State<ViewProfile> {
 		}
 	}
 
-
 	@override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,134 +31,53 @@ class _ViewProfileState extends State<ViewProfile> {
 			),
 			body: ListView(
 				children: <Widget>[
-					CircleAvatar(
-								backgroundImage: NetworkImage("https://avatars1.githubusercontent.com/u/47221273?s=460&u=e86600f2266d871277b266cd11092f9778f4c496&v=4"),
-								maxRadius: 100.0,
-							),
-							SizedBox(height: 30.0,),
-							Center(child: Text("Shreyansh",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceBetween,
-								children: <Widget>[
-									Padding(
-										padding: const EdgeInsets.all(8.0),
-										child: Column(
-											crossAxisAlignment: CrossAxisAlignment.start,
-											children: <Widget>[
-												Text('Roll No',style: TextStyle(fontSize: 18,color: Colors.grey),),
-												Text("IIT2018073"),
-											],
-										),
-									),
-									Padding(
-										padding: const EdgeInsets.all(8.0),
-										child: Column(
-											crossAxisAlignment: CrossAxisAlignment.end,
-											children: <Widget>[
-												Text('Email',style: TextStyle(fontSize: 18,color: Colors.grey),),
-												Text("iit2018073@iiita.ac.in"),
-											],
-										),
-									),
-								],
-							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceBetween,
-								children: <Widget>[
-									Padding(
-										padding: const EdgeInsets.all(8.0),
-										child: Text('Select Gender',style: TextStyle(fontSize: 18,color: Colors.grey),),
-									),
-									Row(
-										mainAxisAlignment: MainAxisAlignment.end,
-										children: <Widget>[
-											Padding(
-												padding: const EdgeInsets.all(8.0),
-												child: GestureDetector(
-													onTap: (){
-														setState(() {
-														});
-													},
-													child: Container(
-														child: Icon(
-															FontAwesomeIcons.mars,
-															color: Colors.white,
-															size: 50,
-														),
-														height: 80,
-														width: 80,
-														decoration: BoxDecoration(
-															borderRadius: BorderRadius.circular(10),
-															color: Colors.blue,
-														),
-													),
-												),
-											),
-											Padding(
-												padding: const EdgeInsets.all(8.0),
-												child: GestureDetector(
-													onTap: (){
-														setState(() {;
-														});
-													},
-													child: Container(
-														child: Icon(
-															FontAwesomeIcons.venus,
-															color: Colors.white,
-															size: 50,
-														),
-														height: 80,
-														width: 80,
-														decoration: BoxDecoration(
-															borderRadius: BorderRadius.circular(10),
-															color: Colors.grey,
-														),
-													),
-												),
-											),
-										],
-									),
-								],
-							),
-							Flexible(
-								flex: 1,
-								child: Container(
-									child: Text('Enter your Phone Number',style: TextStyle(fontSize: 18,color: Colors.grey),),
-									margin: EdgeInsets.fromLTRB(0,20,0,0),),
-							),
-							Expanded(
-								flex: 2,
-								child: Row(
-									children: <Widget>[
-										Container(
-											color: Colors.grey[200],
-											width: 80,
-											child: Padding(
-												padding: const EdgeInsets.all(16.0),
-												child: Text('+91',style: TextStyle(fontSize: 18,color: Colors.grey),),
-											),
-										),
-										SizedBox(width: 10,),
-										Expanded(
-											child: Container(
-												color: Colors.grey[200],
-												child: Padding(
-													padding: const EdgeInsets.all(3.0),
-													child: TextField(
-														keyboardType: TextInputType.number,
-														onChanged: (value){
-															setState(() {
-																//	phoneNumber=value;
-															});
-														},
-														style: TextStyle(fontSize: 18,color: Colors.grey[700],fontWeight: FontWeight.bold),),
-												),
-											),
-										)
-									],
+					SizedBox(height: 10.0,),
+					Center(
+						child: CircleAvatar(
+							backgroundImage: NetworkImage("https://avatars1.githubusercontent.com/u/47221273?s=460&u=e86600f2266d871277b266cd11092f9778f4c496&v=4"),
+							maxRadius: 100.0,
+						),
+					),
+					SizedBox(height: 20.0,),
+					Center(child: Text("##NAMEORGANIZER",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,letterSpacing: 2.0),)),
+					SizedBox(height: 30.0,),
+					Row(
+						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+						children: <Widget>[
+							  Text(
+									"EMAIL"
 								),
-							),
+							SizedBox(width: 30.0,),
+							Text(
+								"##EMIAL"
+							)
 						],
+					),
+					SizedBox(height: 20.0,),
+					Row(
+						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+						children: <Widget>[
+							Text(
+									"Contact Number"
+							),
+							SizedBox(width: 30.0,),
+							Text(
+									"##Number"
+							)
+						],
+					),
+					SizedBox(height: 20.0,),
+					Row(
+						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+						children: <Widget>[
+							Text(
+									"Gender"
+							),
+							SizedBox(width: 30.0,),
+							(gender=="male" || gender=="MALE") ? Icon(FontAwesomeIcons.male,size: 40.0,color: Theme.of(context).accentColor): Icon(FontAwesomeIcons.female,size: 40.0,color: Theme.of(context).accentColor),
+						],
+					),
+				],
 			),
 			bottomNavigationBar: BottomNavigationBar(
 				backgroundColor: Theme.of(context).accentColor,
