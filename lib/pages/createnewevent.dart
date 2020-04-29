@@ -20,7 +20,9 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   String _imageUrl;
   DateTime _time;
   double _duration;
-  EventType _eventType;
+  EventType _eventType = EventType.Theatre;
+
+
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -111,18 +113,32 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                            });
                          },
                        ),
-                       TextFormField(
-                         decoration: const InputDecoration(
-                           icon: const Icon(Icons.local_activity),
-                           hintText: 'Enter type of event to organize',
-                           labelText: 'Event Type',
-                         ),
-                         onChanged: (value){
-                           setState(() {
-                             _description = value;
-                           });
-                         },
-                       ),
+                          DropdownButton<EventType>(
+                            value: _eventType,
+                            items: EventType.values.map((EventType value){
+                              return DropdownMenuItem<EventType>(
+                              value: value,
+                              child: Text(value.name));
+                              }).toList(),
+                            onChanged: (EventType value) {
+                              setState(() {
+                                _eventType = value;
+                              });
+                            },
+
+                          ),
+//                       TextFormField(
+//                         decoration: const InputDecoration(
+//                           icon: const Icon(Icons.local_activity),
+//                           hintText: 'Enter type of event to organize',
+//                           labelText: 'Event Type',
+//                         ),
+//                         onChanged: (value){
+//                           setState(() {
+//                             _description = value;
+//                           });
+//                         },
+//                       ),
 //                       TextFormField(
 //                         decoration: const InputDecoration(
 //                           icon: const Icon(Icons.date_range),
@@ -152,6 +168,11 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                            hintText: 'Enter venue',
                            labelText: 'Veneue',
                          ),
+                         onChanged: (value){
+                           setState(() {
+                             _venue = value;
+                           });
+                         },
                        ),
                        SizedBox(height: 20.0),
                        Card(
@@ -169,7 +190,12 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                              ),
                            )
                        ),
-                       Card(
+                       FlatButton(child: Text("Save"),
+                         onPressed:()  {
+                            setState(() {
+                              saveEvent();
+                            });
+                         },
 
                        )
                      ],
@@ -180,5 +206,9 @@ class _CreateNewEventState extends State<CreateNewEvent> {
          ),
       ),
     );
+  }
+
+  void saveEvent() {
+
   }
 }
