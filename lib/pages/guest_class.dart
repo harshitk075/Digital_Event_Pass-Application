@@ -8,7 +8,7 @@ class Guest{
 	String _imageUrl;
 
 	Guest(this._guestID, this._name, this._email, this._gender,
-			this._contactNumber, this._imageUrl, this._dob);
+			this._contactNumber, this._imageUrl);
 
 	String get guestID => _guestID;
 

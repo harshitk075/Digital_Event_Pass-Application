@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:digitaleventpass/post_class.dart';
 
+import 'enums.dart';
+import 'enums.dart';
+
 class CreateNewEvent extends StatefulWidget {
   @override
   _CreateNewEventState createState() => _CreateNewEventState();
@@ -112,20 +115,19 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                            });
                          },
                        ),
-                          DropdownButton<EventType>(
-                            value: _eventType,
-                            items: EventType.values.map((EventType value){
-                              return DropdownMenuItem<EventType>(
-                              value: value,
-                              child: Text(value.name));
-                              }).toList(),
-                            onChanged: (EventType value) {
-                              setState(() {
-                                _eventType = value;
-                              });
-                            },
-
-                          ),
+//                          DropdownButton<EventType>(
+//                            value: _eventType,
+//                            items: EventType.values.map((EventType value){
+//                              return DropdownMenuItem<EventType>(
+//                               value: value,
+//                               child: Text(value.name));
+//                              }).toList(),
+//                            onChanged: (EventType value) {
+//                              setState(() {
+//                                _eventType = value;
+//                              });
+//                            },
+//                          ),
 //                       TextFormField(
 //                         decoration: const InputDecoration(
 //                           icon: const Icon(Icons.local_activity),

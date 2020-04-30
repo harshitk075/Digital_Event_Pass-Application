@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as p;
 
 class CreateOrganizerProfile extends StatefulWidget {
   @override
@@ -12,14 +15,26 @@ class CreateOrganizerProfile extends StatefulWidget {
 class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
   File _image = null;
-  String _name;
-  String _contactNumber;
-  String _emailId;
-  String _gender;
+  String name;
+  String contactNumber;
+  String emailId;
+  String gender;
+  String imgurl;
+  StorageReference storageReference;
+
+  Future<void> uploadImage() async{
+
+    String filename = p.basename(_image.path);
+    storageReference = FirebaseStorage.instance.ref().child("images/$filename");
+    final StorageUploadTask uploadTask = storageReference.putFile(_image);
+    final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
+    final String url = (await downloadUrl.ref.getDownloadURL());
+    imgurl=url;
+  }
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
+    setState((){
       _image = image;
     });
   }
@@ -38,7 +53,6 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
   }
 
   String dropdownValue = 'GENDER';
-
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -52,6 +66,15 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
       Navigator.pop(context);
     }
   }
+  final databaseReference = Firestore.instance;
+  //push to firestore function
+
+    void PushToDb() async {
+//      Guest obj = new Guest("Org-ID1098",name,emailId,gender,contactNumber,imgurl);
+//      await databaseReference.collection("Organizers")
+//          .document("org-ID1223")
+//          .setData();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +92,6 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 GestureDetector(
                   onTap: () {
                     getImage();
-                    print("$_image");
                   },
                   child: Container(
                     height: 180.0,
@@ -94,7 +116,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                             labelText: 'Name',
                           ),
                           onChanged: (text) {
-                            _name= text;
+                            setState(() {
+                              name= text;
+                            });
                           },
                         ),
                         TextField(
@@ -103,7 +127,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                             labelText: 'Contact Number',
                           ),
                           onChanged: (text) {
-                            _contactNumber= text;
+                            setState(() {
+                              contactNumber= text;
+                            });
                           },
                         )
                       ],
@@ -119,7 +145,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 labelText: 'Email-ID',
               ),
               onChanged: (text) {
-                _emailId= text;
+                setState(() {
+                  emailId= text;
+                });
               },
             ),
             SizedBox(height: 20.0,),
@@ -138,7 +166,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               onChanged: (String newValue) {
               setState(() {
                dropdownValue = newValue;
-               _gender=newValue;
+               gender=newValue;
               });
               },
                items: <String>['GENDER', 'MALE', 'FEMALE', 'OTHERS']
@@ -153,8 +181,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: RaisedButton(
-                onPressed: (){
-                  //here we write a function to instantiate the guest class using Guest() callback
+                onPressed: () async {
+                  await uploadImage();
+                  PushToDb();
                 },
                 color: Theme.of(context).accentColor,
                 child: Text("SUBMIT"),
