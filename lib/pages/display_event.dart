@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EventDisplay extends StatefulWidget {
+
   @override
   _EventDisplayState createState() => _EventDisplayState();
 }
@@ -23,6 +24,7 @@ class _EventDisplayState extends State<EventDisplay> {
 
   @override
   Widget build(BuildContext context) {
+
     return  Scaffold(
         body: ListView(
           children: <Widget>[
@@ -44,7 +46,7 @@ class _EventDisplayState extends State<EventDisplay> {
               ),
             ),
             SizedBox(height: 20.0),
-            Center(child: Text("##HERE COME THE EVENT NAME",style: TextStyle(letterSpacing: 3.0,fontSize: 15.0),)),
+            Center(child: Text("ASMITA",style: TextStyle(letterSpacing: 3.0,fontSize: 15.0),)),
             SizedBox(height: 20.0),
             Column(
               children: <Widget>[

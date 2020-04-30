@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digitaleventpass/pages/display_event.dart';
 import 'package:flutter/material.dart';
-
+import 'package:digitaleventpass/Services/dispalyfunctions.dart';
+import 'package:digitaleventpass/post_class.dart';
 class EventCard extends StatelessWidget {
 
-	final String date,event,venue;
-
-	EventCard({this.date,this.event,this.venue});
+	final String event,venue,eventID,route;
+	EventCard({this.event,this.venue,this.eventID,this.route});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,8 +15,10 @@ class EventCard extends StatelessWidget {
 			 elevation: 10.0,
 			  child: InkWell(
 				 splashColor: Colors.blue.withAlpha(30),
-				 onTap: () {
-            // Navigator.pushNamed(context, );
+				 onTap: () async{
+             //Navigator.pushNamed(context,route, arguments:  {"Event-ID": eventID});
+					   print("printobj");
+					   Post obj=  await FuncEvent(eventID);
 				 },
 					child: Container(
 				 	  width: 300,
@@ -52,17 +56,17 @@ class EventCard extends StatelessWidget {
 									mainAxisAlignment: MainAxisAlignment.spaceAround,
 									children: <Widget>[
 										Text("VENUE"),
-										Text(venue),
+										Text(venue.toUpperCase()),
 									],
 								),
 								SizedBox(height: 15.0,),
-								 Row(
-									mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-									children: <Widget>[
-										Text("DATE"),
-										Text(date),
-									],
-								),
+//								 Row(
+//									mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//									children: <Widget>[
+//										Text("DATE AND TIME"),
+//										Text(time),
+//									],
+//								),
 					  	],
 					  ),
 					),

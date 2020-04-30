@@ -17,8 +17,8 @@ import 'package:google_map_location_picker/generated/i18n.dart' as location_pick
 import 'package:google_map_location_picker/google_map_location_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_map_location_picker/generated/i18n.dart'
-as location_picker;
+import 'package:google_map_location_picker/generated/i18n.dart'  as location_picker;
+import 'package:digitaleventpass/pages/makeinviteelist.dart';
 
 
 void main() => runApp(MaterialApp(
@@ -38,7 +38,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/eventupdations",
+   initialRoute: "/",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
@@ -52,8 +52,9 @@ void main() => runApp(MaterialApp(
      "/qrutility"     : (context)=> QrUtility(),
      "/ticketshow"    : (context)=> Ticket(),
      "/eventdisplay"   : (context)=> EventDisplay(),
-     "/createorgprofile": (context)=> CreateOrganizerProfile(),
-     "/eventupdations":  (context)=>EventUpdations(),
+     "/createorgprofile":(context)=> CreateOrganizerProfile(),
+     "/eventupdations" : (context)=>EventUpdations(),
+     "/makelist"       : (context)=>MakeList(),
    },
 ));
 

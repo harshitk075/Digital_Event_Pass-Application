@@ -36,21 +36,19 @@ class _ManageEventState extends State<ManageEvent> {
   }
 
   void fetchUpdates() async{
-
-    await for(var snapshot in _firestore.collection('events').orderBy('createdAt', descending: true).snapshots())
+    await for(var snapshot in _firestore.collection('events').orderBy('eventTimeAndDate', descending: true).snapshots())
     {
       List<EventCard> newUpdatesList = [];
+      print(snapshot.documents.length);
       for(var message in snapshot.documents)
       {
-        String msg,event,displayDate;
-        msg = message.data['venue']??'Message Text Unavailable';
-        event=message.data['event']??'Event Unavailable';
-
-        int timestamp = message.data['createdAt']??1580187210337;
-        var date = new DateTime.fromMillisecondsSinceEpoch(timestamp);
-        displayDate=DateFormat("dd MMM yyyy hh:mm a").format(date).toString();
-
-        newUpdatesList.add(EventCard(event: event,date: displayDate, venue: msg,));
+        String eventName,eventVenue,EventID;
+//        String eventDateAndTime;
+        EventID= message.documentID;
+        eventVenue = message.data['eventvenue']??'Message Text Unavailable';
+        eventName = message.data['eventname']??'Event Unavailable';
+//        eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
+        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID,route: "/eventupdations",));
       }
       setState(() {
         eventList = newUpdatesList;
