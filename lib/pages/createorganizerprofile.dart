@@ -15,11 +15,12 @@ class CreateOrganizerProfile extends StatefulWidget {
 class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
   File _image = null;
-  String name;
-  String contactNumber;
-  String emailId;
-  String gender;
-  String imgurl;
+  String orgID;
+  String orgname;
+  int   orgcontactNumber;
+  String orgmailId;
+  String orggender;
+  String orgimgurl;
   StorageReference storageReference;
 
   Future<void> uploadImage() async{
@@ -29,7 +30,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
     final StorageUploadTask uploadTask = storageReference.putFile(_image);
     final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
     final String url = (await downloadUrl.ref.getDownloadURL());
-    imgurl=url;
+    orgimgurl =url;
   }
 
   Future getImage() async {
@@ -47,7 +48,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
           Icons.add_a_photo,
           size: 30.0,
         ),
-        Text("Upload photo"),
+        Text("Choose Profile\n picture"),
       ],
     );
   }
@@ -69,11 +70,26 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
   final databaseReference = Firestore.instance;
   //push to firestore function
 
-    void PushToDb() async {
-//      Guest obj = new Guest("Org-ID1098",name,emailId,gender,contactNumber,imgurl);
-//      await databaseReference.collection("Organizers")
-//          .document("org-ID1223")
-//          .setData();
+    Future PushToDb() async {
+      //make guest object to reference at alter stage
+      Guest obj = new Guest("Org-ID1098",orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
+      await databaseReference.collection("Organizerinfo")
+          .add({
+            'OrgName'   : orgname,
+            'OrgmailId'  : orgmailId,
+            'OrgGender' : orggender,
+            'OrgContactNumber' : orgcontactNumber,
+            'OrgimgURL'        : orgimgurl,
+      });
+      //when we have organizer ID
+//      .document("org-ID1223")
+//          .setData({
+//      'OrgName'   : orgname,
+//      'OrgmaiId'  : orgmailId,
+//      'OrgGender' : orggender,
+//      'OrgContactNumber' : orgcontactNumber,
+//      'OrgimgURL'        : orgimgurl,
+//      });
     }
 
   @override
@@ -89,19 +105,38 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    getImage();
-                  },
-                  child: Container(
-                    height: 180.0,
-                    width: 140.0,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(15.0),
+                Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        getImage();
+                      },
+                      child: Container(
+                        height: 180.0,
+                        width: 140.0,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[400],
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: _image==null ? BlankIcon() : ClipRRect(child: Image.file(_image,fit: BoxFit.cover,),borderRadius: BorderRadius.circular(15.0),),
+                      ),
                     ),
-                    child: _image==null ? BlankIcon() : ClipRRect(child: Image.file(_image,fit: BoxFit.cover,),borderRadius: BorderRadius.circular(15.0),),
-                  ),
+                    FlatButton(
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      disabledColor: Colors.grey,
+                      disabledTextColor: Colors.black,
+                      //padding: EdgeInsets.all(8.0),
+                      splashColor: Colors.blueAccent,
+                      onPressed: () async {
+                        await uploadImage();
+                      },
+                      child: Text(
+                        "  Upload  ",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(width: 8.0,),
                 Expanded(
@@ -117,7 +152,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                           ),
                           onChanged: (text) {
                             setState(() {
-                              name= text;
+                              orgname= text;
                             });
                           },
                         ),
@@ -126,9 +161,10 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                             border: OutlineInputBorder(),
                             labelText: 'Contact Number',
                           ),
-                          onChanged: (text) {
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
                             setState(() {
-                              contactNumber= text;
+                              orgcontactNumber= int.parse(value);
                             });
                           },
                         )
@@ -138,7 +174,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 )
               ],
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(height: 10.0,),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -146,7 +182,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               ),
               onChanged: (text) {
                 setState(() {
-                  emailId= text;
+                  orgmailId= text;
                 });
               },
             ),
@@ -166,7 +202,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               onChanged: (String newValue) {
               setState(() {
                dropdownValue = newValue;
-               gender=newValue;
+               orggender=newValue;
               });
               },
                items: <String>['GENDER', 'MALE', 'FEMALE', 'OTHERS']
@@ -182,8 +218,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               padding: const EdgeInsets.all(30.0),
               child: RaisedButton(
                 onPressed: () async {
-                  await uploadImage();
-                  PushToDb();
+                  await PushToDb();
+                  Guest.is_profileset=1;
+                  Navigator.pop(context);
                 },
                 color: Theme.of(context).accentColor,
                 child: Text("SUBMIT"),

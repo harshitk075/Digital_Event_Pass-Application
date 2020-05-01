@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:digitaleventpass/post_class.dart';
 
 class EventDisplay extends StatefulWidget {
+
+  final Post box;
+  EventDisplay({Key key, @required this.box}):super(key: key);
 
   @override
   _EventDisplayState createState() => _EventDisplayState();
 }
 
 class _EventDisplayState extends State<EventDisplay> {
+
+  String ename;
+  String etype;
+  String evenue;
+  double duration;
+  String description;
+  @override
+  void initState() {
+    super.initState();
+    Post newref= widget.box;
+    ename= newref.eventname;
+    etype= newref.eventtype;
+    evenue= newref.eventvenue;
+    duration= newref.duration;
+    description=newref.eventDescription;
+  }
+
 
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
@@ -46,7 +67,7 @@ class _EventDisplayState extends State<EventDisplay> {
               ),
             ),
             SizedBox(height: 20.0),
-            Center(child: Text("ASMITA",style: TextStyle(letterSpacing: 3.0,fontSize: 15.0),)),
+            Center(child: Text(ename,style: TextStyle(letterSpacing: 3.0,fontSize: 15.0),)),
             SizedBox(height: 20.0),
             Column(
               children: <Widget>[
@@ -94,7 +115,7 @@ class _EventDisplayState extends State<EventDisplay> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           Text("VENUE"),
-                          Text("##PRINT VENUE"),
+                          Text(evenue),
                         ],
                       ),
                     ),
@@ -127,8 +148,8 @@ class _EventDisplayState extends State<EventDisplay> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("details x"),
-                          Text("##detail xxxx"),
+                          Text("EVENT TYPE"),
+                          Text(etype),
                         ],
                       ),
                     ),
@@ -141,8 +162,8 @@ class _EventDisplayState extends State<EventDisplay> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("details x"),
-                          Text("##detail xxxx"),
+                          Text("EVENT DURATION"),
+                          Text("$duration"),
                         ],
                       ),
                     ),

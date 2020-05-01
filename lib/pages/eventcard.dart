@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/pages/display_event.dart';
+import 'package:digitaleventpass/pages/eventupdations.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/Services/dispalyfunctions.dart';
 import 'package:digitaleventpass/post_class.dart';
@@ -15,10 +16,12 @@ class EventCard extends StatelessWidget {
 			 elevation: 10.0,
 			  child: InkWell(
 				 splashColor: Colors.blue.withAlpha(30),
-				 onTap: () async{
-             //Navigator.pushNamed(context,route, arguments:  {"Event-ID": eventID});
-					   print("printobj");
-					   Post obj=  await FuncEvent(eventID);
+					 onTap: () async{
+					   Post ref=  await FuncEvent(eventID);
+						 Navigator.push(
+								 context,
+								 MaterialPageRoute(
+										 builder: (context) => (route=="/eventdisplay") ? EventDisplay(box : ref) : EventUpdations()));
 				 },
 					child: Container(
 				 	  width: 300,

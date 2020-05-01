@@ -1,15 +1,14 @@
 
 class Guest{
-	static int is_profileset=1;
+	static int is_profileset=0;
 	String _guestID;
 	String _name;
 	String _email;
 	String _gender;
-	String _contactNumber;
+	int _contactNumber;
 	String _imageUrl;
 
-	Guest(this._guestID, this._name, this._email, this._gender,
-			this._contactNumber, this._imageUrl);
+	Guest(this._guestID, this._name, this._email, this._gender, this._contactNumber, this._imageUrl);
 
 	int get flag => is_profileset;
 
@@ -39,9 +38,9 @@ class Guest{
 		_gender = value;
 	}
 
-	String get contactNumber => _contactNumber;
+	int get contactNumber => _contactNumber;
 
-	set contactNumber(String value) {
+	set contactNumber(int value) {
 		_contactNumber = value;
 	}
 
