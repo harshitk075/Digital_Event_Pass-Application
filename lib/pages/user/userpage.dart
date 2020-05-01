@@ -37,19 +37,21 @@ class _userPageState extends State<userPage> {
   }
 
   void fetchUpdates() async{
+
     await for(var snapshot in _firestore.collection('events').orderBy('eventTimeAndDate', descending: true).snapshots())
     {
       List<EventCard> newUpdatesList = [];
       print(snapshot.documents.length);
       for(var message in snapshot.documents)
       {
-        String eventName,eventVenue,EventID;
+        String eventName,eventVenue,EventID,eventimgURL;
 //        String eventDateAndTime;
         EventID= message.documentID;
         eventVenue = message.data['eventvenue']??'Message Text Unavailable';
         eventName = message.data['eventname']??'Event Unavailable';
-//        eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
-        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, route: "/eventdisplay"));
+        eventimgURL= message.data['imageurl']??'No Image';
+//      eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
+        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, eventimageurl: eventimgURL, route: "/eventdisplay"));
       }
       setState(() {
         eventList = newUpdatesList;

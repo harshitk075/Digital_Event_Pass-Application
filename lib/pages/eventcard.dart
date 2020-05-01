@@ -6,8 +6,9 @@ import 'package:digitaleventpass/Services/dispalyfunctions.dart';
 import 'package:digitaleventpass/post_class.dart';
 class EventCard extends StatelessWidget {
 
-	final String event,venue,eventID,route;
-	EventCard({this.event,this.venue,this.eventID,this.route});
+	final String event,venue,eventID,eventimageurl, route;
+	EventCard({this.event,this.venue,this.eventID,this.eventimageurl,this.route});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,12 +38,21 @@ class EventCard extends StatelessWidget {
 					  		  Container(
 					  				 height: 150.0,
 					  				 width: 300.0,
-					  				 decoration: BoxDecoration(
-					  					 image: DecorationImage(
-					  						 image: NetworkImage("https://www.womensbusinessdaily.com/wp-content/uploads/2017/07/Messe_Luzern_Corporate_Event.jpg"),
-					  						 fit: BoxFit.cover,
-					  					 )
-					  				 ),
+					  				 child: Image.network(
+											 eventimageurl,
+											 fit: BoxFit.cover,
+											 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+												 if (loadingProgress == null)
+													 return child;
+												 return Center(
+													 child: CircularProgressIndicator(
+														 value: loadingProgress.expectedTotalBytes != null
+																 ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+																 : null,
+													 ),
+												 );
+											 },
+										 ),
 					  			 ),
 					  	 	  Container(
 					  				height: 40.0,

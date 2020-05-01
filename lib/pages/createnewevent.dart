@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:digitaleventpass/post_class.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as p;
 
 class CreateNewEvent extends StatefulWidget {
   @override
@@ -25,9 +27,19 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   double duration;
   String eventtype;
 
+  StorageReference storageReference;
+  Future<void> uploadImage() async{
+
+    String filename = p.basename(_image.path);
+    storageReference = FirebaseStorage.instance.ref().child("images/$filename");
+    final StorageUploadTask uploadTask = storageReference.putFile(_image);
+    final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
+    final String url = (await downloadUrl.ref.getDownloadURL());
+    imageUrl =url;
+  }
+
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-
     setState(() {
       _image = image;
     });
@@ -39,14 +51,18 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   }
 
   String dropdownValue = 'EVENTCHOOSE';
+
   final databaseReference = Firestore.instance;
   void SaveEvent() async {
+    await uploadImage();
+    //print(imageUrl);
     await databaseReference.collection("events")
           .add({
       "eventname": eventname,
       "eventtype": eventtype,
       "eventduration":duration,
       "eventvenue": venue,
+      "imageurl"  : imageUrl,
       "eventdescription" : description,
       "eventTimeAndDate" : time.toString(),
     });
@@ -87,7 +103,6 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                 child: InkWell(
                   onTap: () {
                     getImage();
-                    print("$_image");
                   },
                   child: _image == null ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +113,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                       ),
                       Text("Upload photo"),
                     ],
-                  ) : Image.file(_image),
+                  ) : ClipRRect(child: Image.file(_image,fit: BoxFit.cover,),borderRadius: BorderRadius.circular(30.0),),
                 )
             ),
             SizedBox(height: 10.0),

@@ -18,7 +18,7 @@ import 'package:google_map_location_picker/google_map_location_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_map_location_picker/generated/i18n.dart'  as location_picker;
-import 'package:digitaleventpass/pages/makeinviteelist.dart';
+import 'package:digitaleventpass/pages/eventinviteelist.dart';
 
 
 void main() => runApp(MaterialApp(
@@ -38,7 +38,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/",
+   initialRoute: "/makelist",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),

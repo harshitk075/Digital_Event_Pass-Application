@@ -6,7 +6,6 @@ import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
-
 class CreateOrganizerProfile extends StatefulWidget {
   @override
   _CreateOrganizerProfileState createState() => _CreateOrganizerProfileState();
@@ -23,7 +22,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
   String orgimgurl;
   StorageReference storageReference;
 
-  Future<void> uploadImage() async{
+   Future<void> uploadImage() async{
 
     String filename = p.basename(_image.path);
     storageReference = FirebaseStorage.instance.ref().child("images/$filename");

@@ -47,8 +47,9 @@ class _ManageEventState extends State<ManageEvent> {
         EventID= message.documentID;
         eventVenue = message.data['eventvenue']??'Message Text Unavailable';
         eventName = message.data['eventname']??'Event Unavailable';
+        String eventimgURL= message.data['imageurl']??'No Image';
 //        eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
-        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID,route: "/eventupdations",));
+        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, eventimageurl: eventimgURL, route: "/eventupdations",));
       }
       setState(() {
         eventList = newUpdatesList;

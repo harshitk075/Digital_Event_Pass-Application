@@ -8,7 +8,7 @@ class Post {
 	String _eventDescription;
 	String _imageUrl;
 
-	Post(this._eventID, this._eventname, this._eventvenue,this._eventtype, this._duration, this._eventDescription);
+	Post(this._eventID, this._eventname, this._eventvenue,this._eventtype, this._duration, this._eventDescription,this._imageUrl);
 
 	String get eventID => _eventID;
 
