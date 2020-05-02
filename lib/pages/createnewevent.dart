@@ -9,6 +9,7 @@ import 'package:digitaleventpass/post_class.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
+import 'package:digitaleventpass/globals.dart';
 
 class CreateNewEvent extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   void SaveEvent() async {
     await uploadImage();
     //print(imageUrl);
-    await databaseReference.collection("events")
+    await databaseReference.collection("OrganizerContainer").document(Globaldata.OrganizerID).collection("Events")
           .add({
       "eventname": eventname,
       "eventtype": eventtype,
@@ -67,17 +68,17 @@ class _CreateNewEventState extends State<CreateNewEvent> {
       "eventTimeAndDate" : time.toString(),
     });
 
-  //this is used when we have a documnet ID
-//    databaseReference.collection("events")
-//        .document("EventID-3e0000000")
-//        .setData({
-//      "eventname": eventname,
-//      "eventtype": eventtype,
-//      "eventduration":duration,
-//      "eventvenue": venue,
-//      "eventdescription" : description,
-//      "eventTimeAndDate" : time,
-//    });
+    await databaseReference.collection("events")
+        .add({
+      "eventname": eventname,
+      "eventtype": eventtype,
+      "eventduration":duration,
+      "eventvenue": venue,
+      "imageurl"  : imageUrl,
+      "eventdescription" : description,
+      "eventTimeAndDate" : time.toString(),
+    });
+
   }
 
   @override

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
+import 'package:digitaleventpass/sign_in.dart';
+import 'package:digitaleventpass/pages/loginpage.dart';
+import 'package:digitaleventpass/globals.dart';
 
 class organizerPage extends StatefulWidget {
   @override
@@ -205,7 +208,6 @@ class _organizerPageState extends State<organizerPage> {
             ListTile(
               title: Text('SETTINGS'),
               onTap: () {
-                // Update the state of the app.
                 Navigator.pop(context);
               },
             ),
@@ -213,8 +215,8 @@ class _organizerPageState extends State<organizerPage> {
             ListTile(
               title: Text('LOG OUT'),
               onTap: () {
-                // Update the state of the app.
-                Navigator.pop(context);
+                signOutGoogle();
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return Login();}), ModalRoute.withName('/'));
               },
             ),
             Divider(height: 2.0,thickness: 2.0,color: Colors.black,),

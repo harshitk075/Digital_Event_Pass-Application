@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/pages/user/columntemplate.dart';
 import 'package:digitaleventpass/pages/eventcard.dart';
 import 'package:intl/intl.dart';
+import 'package:digitaleventpass/globals.dart';
 
 class ManageEvent extends StatefulWidget {
   @override
@@ -36,14 +37,14 @@ class _ManageEventState extends State<ManageEvent> {
   }
 
   void fetchUpdates() async{
-    await for(var snapshot in _firestore.collection('events').orderBy('eventTimeAndDate', descending: true).snapshots())
+    await for(var snapshot in _firestore.collection('OrganizerContainer').document(Globaldata.OrganizerID).collection("Events").orderBy('eventTimeAndDate', descending: true).snapshots())
     {
       List<EventCard> newUpdatesList = [];
       print(snapshot.documents.length);
       for(var message in snapshot.documents)
       {
         String eventName,eventVenue,EventID;
-//        String eventDateAndTime;
+//      String eventDateAndTime;
         EventID= message.documentID;
         eventVenue = message.data['eventvenue']??'Message Text Unavailable';
         eventName = message.data['eventname']??'Event Unavailable';

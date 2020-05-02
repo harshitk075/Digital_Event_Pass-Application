@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:digitaleventpass/globals.dart';
 
 class MakeList extends StatefulWidget {
   @override
@@ -24,7 +25,8 @@ class _MakeListState extends State<MakeList> {
 
   Future<List<User>> _getuser() async {
     List<User> newUpdatesList = [];
-    await for(var snapshot in _firestore.collection('Inviteelist').snapshots())
+    await for(var snapshot in _firestore.collection('OrganizerContainer').document(Globaldata.OrganizerID).collection("Events").
+        .snapshots())
     {
       //print(snapshot.documents.length);
       for(var message in snapshot.documents)

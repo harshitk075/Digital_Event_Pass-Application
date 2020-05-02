@@ -1,10 +1,10 @@
 import 'package:digitaleventpass/post_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:digitaleventpass/globals.dart';
   Future<Post> FuncEvent(String ID) async{
   final databaseReference = Firestore.instance;
     DocumentReference documentReference =
-    databaseReference.collection("events").document(ID);
+    databaseReference.collection("OrganizerContainer").document(Globaldata.OrganizerID).collection("Events").document(ID);
     Post obj;
     await documentReference.get().then((datasnapshot) {
 

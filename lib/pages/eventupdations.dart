@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class EventUpdations extends StatefulWidget {
+  final String EventID;
+
+  EventUpdations({Key key, @required this.EventID}):super(key: key);
+
   @override
   _EventUpdationsState createState() => _EventUpdationsState();
 }

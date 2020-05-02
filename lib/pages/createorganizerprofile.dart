@@ -6,6 +6,8 @@ import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
+import 'package:digitaleventpass/globals.dart';
+
 class CreateOrganizerProfile extends StatefulWidget {
   @override
   _CreateOrganizerProfileState createState() => _CreateOrganizerProfileState();
@@ -14,13 +16,14 @@ class CreateOrganizerProfile extends StatefulWidget {
 class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
   File _image = null;
-  String orgID;
+  String orgID=Globaldata.OrganizerID;
   String orgname;
   int   orgcontactNumber;
   String orgmailId;
   String orggender;
   String orgimgurl;
   StorageReference storageReference;
+  bool isphotoupload=false;
 
    Future<void> uploadImage() async{
 
@@ -30,6 +33,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
     final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
     final String url = (await downloadUrl.ref.getDownloadURL());
     orgimgurl =url;
+    setState(() {
+      isphotoupload=true;
+    });
   }
 
   Future getImage() async {
@@ -71,8 +77,8 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
     Future PushToDb() async {
       //make guest object to reference at alter stage
-      Guest obj = new Guest("Org-ID1098",orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
-      await databaseReference.collection("Organizerinfo")
+      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
+      await databaseReference.collection("OrganizerContainer").document(orgID).collection("Profile")
           .add({
             'OrgName'   : orgname,
             'OrgmailId'  : orgmailId,
@@ -217,9 +223,14 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               padding: const EdgeInsets.all(30.0),
               child: RaisedButton(
                 onPressed: () async {
-                  await PushToDb();
-                  Guest.is_profileset=1;
-                  Navigator.pop(context);
+                  if(isphotoupload) {
+                    await PushToDb();
+                    Guest.is_profileset = 1;
+                    Navigator.pop(context);
+                  }
+                  else{
+                    print("Upload image");
+                  }
                 },
                 color: Theme.of(context).accentColor,
                 child: Text("SUBMIT"),
