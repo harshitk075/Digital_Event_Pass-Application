@@ -53,7 +53,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   String dropdownValue = 'EVENTCHOOSE';
 
   final databaseReference = Firestore.instance;
-  void SaveEvent() async {
+  Future SaveEvent() async {
     await uploadImage();
     //print(imageUrl);
     await databaseReference.collection("events")

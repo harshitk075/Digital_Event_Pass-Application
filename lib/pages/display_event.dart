@@ -19,13 +19,14 @@ class _EventDisplayState extends State<EventDisplay> {
   String description;
   @override
   void initState() {
-    super.initState();
+
     Post newref= widget.box;
     ename= newref.eventname;
     etype= newref.eventtype;
     evenue= newref.eventvenue;
     duration= newref.duration;
     description=newref.eventDescription;
+    super.initState();
   }
 
 

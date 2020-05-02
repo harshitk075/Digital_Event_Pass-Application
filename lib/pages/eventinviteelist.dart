@@ -37,9 +37,10 @@ class _MakeListState extends State<MakeList> {
       //print(newUpdatesList.length);
       return newUpdatesList;
     }
+    return newUpdatesList;
   }
 
-  void adduser(User u) async{
+  Future adduser(User u) async{
      await PushToDb(u);
     setState(() {
     });

@@ -32,7 +32,9 @@ class _ManageEventState extends State<ManageEvent> {
 
   @override
   void initState() {
+
     fetchUpdates();
+    super.initState();
   }
 
   void fetchUpdates() async{

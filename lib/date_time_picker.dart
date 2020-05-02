@@ -45,7 +45,7 @@ class BasicTimeField extends StatelessWidget {
 class BasicDateTimeField extends StatelessWidget {
   final format = DateFormat("yyyy-MM-dd HH:mm");
 	Function onChng;
-	BasicDateTimeField({this.onChng});
+	BasicDateTimeField({@required this.onChng});
 
 	@override
 	Widget build(BuildContext context) {

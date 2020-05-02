@@ -34,6 +34,7 @@ class _userPageState extends State<userPage> {
   @override
   void initState() {
     fetchUpdates();
+    super.initState();
   }
 
   void fetchUpdates() async{

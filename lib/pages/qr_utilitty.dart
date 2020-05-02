@@ -12,11 +12,12 @@ class _QrUtilityState extends State<QrUtility> {
 	bool _isTorchOn = false;
 	@override
 	void initState() {
-		super.initState();
+
 
 		_captureController.onCapture((data) {
 			print('onCapture----$data');
 		});
+		super.initState();
 	}
   @override
   Widget build(BuildContext context) {
