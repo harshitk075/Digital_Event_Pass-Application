@@ -12,7 +12,15 @@ class EventUpdations extends StatefulWidget {
 class _EventUpdationsState extends State<EventUpdations> {
 
   int _selectedIndex = 0;
-  
+  String EventID;
+
+  @override
+  void initState() {
+
+    EventID = widget.EventID;
+    super.initState();
+  }
+
   void _onItemTapped(int index) {
     if(index==0)
     {
@@ -75,7 +83,7 @@ class _EventUpdationsState extends State<EventUpdations> {
               SizedBox(height: 20.0,),
               GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, "/makelist");
+                  Navigator.pushNamed(context, "/makelist", arguments: {'ID': EventID});
                 },
                 child: Container(
                   height: 150.0,

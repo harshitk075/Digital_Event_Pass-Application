@@ -22,7 +22,7 @@ class EventCard extends StatelessWidget {
 						 Navigator.push(
 								 context,
 								 MaterialPageRoute(
-										 builder: (context) => (route=="/eventdisplay") ? EventDisplay(box : ref) : EventUpdations(EventID: ,)));
+										 builder: (context) => (route=="/eventdisplay") ? EventDisplay(box : ref) : EventUpdations(EventID: eventID)));
 				 },
 					child: Container(
 				 	  width: 300,

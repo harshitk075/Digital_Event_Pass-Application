@@ -15,18 +15,18 @@ class _MakeListState extends State<MakeList> {
 
   final _firestore = Firestore.instance;
 
-  Future PushToDb(User x) async {
-    await _firestore.collection("Inviteelist")
+  Future PushToDb(User x,String IDorg) async {
+    await _firestore.collection("OrganizerContainer").document(Globaldata.OrganizerID).collection("Events").document(IDorg).collection('Inviteelist')
         .add({
         'InviteeName'   : x.name,
       'InviteemailId' : x.email,
     });
   }
 
-  Future<List<User>> _getuser() async {
+  Future<List<User>> _getuser(String ID) async {
     List<User> newUpdatesList = [];
     await for(var snapshot in _firestore.collection('OrganizerContainer').document(Globaldata.OrganizerID).collection("Events").
-        .snapshots())
+        document(ID).collection('Inviteelist').snapshots())
     {
       //print(snapshot.documents.length);
       for(var message in snapshot.documents)
@@ -42,8 +42,8 @@ class _MakeListState extends State<MakeList> {
     return newUpdatesList;
   }
 
-  Future adduser(User u) async{
-     await PushToDb(u);
+  Future adduser(User u,String IDorg) async{
+     await PushToDb(u,IDorg);
     setState(() {
     });
   }
@@ -52,6 +52,10 @@ class _MakeListState extends State<MakeList> {
 
   @override
   Widget build(BuildContext context) {
+
+    Map data = ModalRoute.of(context).settings.arguments;
+    String ID = data['ID'];
+    print(ID);
     return Scaffold(
       appBar: AppBar(
         title: Text("INVITEE LIST",style: TextStyle(fontSize: 25.0,letterSpacing: 2.0),),
@@ -114,7 +118,7 @@ class _MakeListState extends State<MakeList> {
                            String n=User_name,e=User_email;
                            if(n!=null && e!=null){
                              User x= User(name: n, email: e);
-                             await adduser(x);
+                             await adduser(x,ID);
                              //print(n+" "+e);
                            }
                            _controller1.clear();
@@ -131,7 +135,7 @@ class _MakeListState extends State<MakeList> {
           Expanded(
               child: Container(
                 child: FutureBuilder(
-                  future: _getuser(),
+                  future: _getuser(ID),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
                       return Container(
