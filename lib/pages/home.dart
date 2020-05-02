@@ -45,7 +45,7 @@ class _homeState extends State<home> {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      Navigator.pushNamed(context, "/organizerPage");
+                      Navigator.pushNamed(context,"/organizerPage");
                     },
                     child: Container(
                       padding: EdgeInsets.fromLTRB(30, 15, 0.0, 10),
