@@ -1,6 +1,6 @@
 
 class Guest{
-	static int is_profileset=1;
+	static bool is_profileset=false;
 	String _guestID;
 	String _name;
 	String _email;
@@ -10,7 +10,7 @@ class Guest{
 
 	Guest(this._guestID, this._name, this._email, this._gender, this._contactNumber, this._imageUrl);
 
-	int get flag => is_profileset;
+	bool get flag => is_profileset;
 
 	String get guestID => _guestID;
 
