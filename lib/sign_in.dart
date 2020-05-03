@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
 	assert(user.uid == currentUser.uid);
 	print(user.uid);
 	print("successfully signed in");
+	await AddOrganizer(uid,name,email);
 	Globaldata.OrganizerID=user.uid;
 	return 'signInWithGoogle succeeded: $user';
 
@@ -53,5 +55,18 @@ Future<String> signInWithGoogle(BuildContext context) async {
 void signOutGoogle() async {
 	await googleSignIn.signOut();
 
-	print("User Sign Out");
+	print("User Signed Out");
+}
+
+
+void AddOrganizer(String uid, String name, String email) async{
+
+	final _firestore = Firestore.instance;
+	await _firestore.collection("Organizers").document(uid)
+			.setData({
+		'OrganizerName'   : name,
+		'Organizeremail' : email,
+		'is_profileset'  : false,
+	});
+
 }

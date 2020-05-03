@@ -17,13 +17,20 @@ class EventCard extends StatelessWidget {
 			 elevation: 10.0,
 			  child: InkWell(
 				 splashColor: Colors.blue.withAlpha(30),
-					 onTap: () async{
-					   Post ref=  await FuncEvent(eventID);
-						 Navigator.push(
-								 context,
-								 MaterialPageRoute(
-										 builder: (context) => (route=="/eventdisplay") ? EventDisplay(box : ref) : EventUpdations(EventID: eventID)));
-				 },
+					 onTap: () async {
+						 if (route == "/eventdisplay") {
+							 Post ref = await FuncEvent(eventID);
+							 Navigator.push(
+									 context,
+									 MaterialPageRoute(
+											 builder: (context) => EventDisplay(box: ref)));
+						 }
+						 else {
+							 Navigator.push(context,
+									 MaterialPageRoute(
+											 builder: (context) => EventUpdations(EventID: eventID)));
+						 }
+					 },
 					child: Container(
 				 	  width: 300,
 						height: 300,

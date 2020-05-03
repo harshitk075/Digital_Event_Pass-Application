@@ -83,7 +83,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
 
   @override
   Widget build(BuildContext context) {
-    return (Guest.is_profileset == 1) ? Container(
+    return (Guest.is_profileset) ? Container(
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/backsm2.jpg"),

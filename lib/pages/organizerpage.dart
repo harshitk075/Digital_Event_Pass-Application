@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
@@ -30,6 +31,23 @@ class _organizerPageState extends State<organizerPage> {
          //Navigator.popAndPushNamed(context, '/');
          Navigator.pop(context);
        }
+  }
+
+  void checkprofilestatus() async {
+    final databaseReference = Firestore.instance;
+    DocumentReference documentReference =
+    databaseReference.collection("Organizers").document(Globaldata.OrganizerID);
+    await documentReference.get().then((datasnapshot) {
+
+      bool X=  datasnapshot.data['is_profileset'];
+      Guest.is_profileset=X;
+    });
+  }
+
+  @override
+   void initState() {
+     checkprofilestatus();
+     super.initState();
   }
 
   @override

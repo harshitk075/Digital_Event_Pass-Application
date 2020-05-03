@@ -225,7 +225,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 onPressed: () async {
                   if(isphotoupload) {
                     await PushToDb();
-                    Guest.is_profileset = 1;
+                    Guest.is_profileset = true;
+                    //update true in firestore also
+                    await setprofilestatus();
                     Navigator.pop(context);
                   }
                   else{
@@ -257,4 +259,13 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
       ),
     );
   }
+}
+
+setprofilestatus() async {
+
+  final databaseReference = Firestore.instance;
+  await databaseReference.collection("Organizers").document(Globaldata.OrganizerID).updateData({
+    'is_profileset': true
+  });
+  
 }
