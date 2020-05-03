@@ -1,6 +1,6 @@
 
 class Guest{
-	static bool is_profileset=false;
+	static bool is_profileset=true;
 	String _guestID;
 	String _name;
 	String _email;

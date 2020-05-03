@@ -78,7 +78,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
       "eventdescription" : description,
       "eventTimeAndDate" : time.toString(),
     });
-
+    Navigator.pop(context);
   }
 
   @override

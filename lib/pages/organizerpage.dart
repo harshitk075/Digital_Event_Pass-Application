@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digitaleventpass/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
@@ -7,6 +8,8 @@ import 'package:digitaleventpass/pages/loginpage.dart';
 import 'package:digitaleventpass/globals.dart';
 
 class organizerPage extends StatefulWidget {
+  final String mUid;
+  organizerPage({this.mUid});
   @override
   _organizerPageState createState() => _organizerPageState();
 }
@@ -33,20 +36,20 @@ class _organizerPageState extends State<organizerPage> {
        }
   }
 
-  void checkprofilestatus() async {
-    final databaseReference = Firestore.instance;
-    DocumentReference documentReference =
-    databaseReference.collection("Organizers").document(Globaldata.OrganizerID);
-    await documentReference.get().then((datasnapshot) {
-
-      bool X=  datasnapshot.data['is_profileset'];
-      Guest.is_profileset=X;
-    });
-  }
+//  void checkprofilestatus() async {
+//    final databaseReference = Firestore.instance;
+//    DocumentReference documentReference =
+//    databaseReference.collection("Organizers").document(Globaldata.OrganizerID);
+//    await documentReference.get().then((datasnapshot) {
+//
+//      bool X=  datasnapshot.data['is_profileset'];
+//      Guest.is_profileset=X;
+//    });
+//  }
 
   @override
    void initState() {
-     checkprofilestatus();
+     fetchProfileData();
      super.initState();
   }
 
@@ -259,5 +262,12 @@ class _organizerPageState extends State<organizerPage> {
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  void fetchProfileData() async {
+    final _firestore = Firestore.instance;
+    var document = await _firestore.collection('OriganizerContainer').document(widget.mUid).get();
+    print(document.data);
+    home.setUsername(document.data['OrgName'].substring(0,document.data['OrgName'].indexOf(' ')));
   }
 }

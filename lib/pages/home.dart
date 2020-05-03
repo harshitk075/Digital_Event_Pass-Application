@@ -1,14 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'loginpage.dart';
+import 'organizerpage.dart';
+import 'package:digitaleventpass/constants.dart';
 
-
+bool _firstLogIn;
+String _uid;
+String _username;
+bool fetchingData=false;
+final _firestore = Firestore.instance;
 class home extends StatefulWidget {
+  static String getUid()=>_uid;
+  static void setUid(String uid){
+    _uid= uid;
+  }
+  static String getUsername()=>_username;
+  static void setUsername(String username){
+    _username=username;
+  }
   @override
   _homeState createState() => _homeState();
 }
 
 class _homeState extends State<home> {
   double _screenHeight,_screenWidth;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     _screenHeight=MediaQuery.of(context).size.height;
@@ -45,7 +69,13 @@ class _homeState extends State<home> {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      Navigator.pushNamed(context,"/login");
+//                      Navigator.pushNamed(context,"/login");
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                        _firstLogIn
+                            ? Login()
+                            : organizerPage(mUid: _uid,),
+                      ));
                     },
                     child: Container(
                       padding: EdgeInsets.fromLTRB(30, 15, 0.0, 10),
@@ -105,6 +135,16 @@ class _homeState extends State<home> {
 
       ],),
     );
+  }
+  void checkLogin() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    _uid= preferences.getString(kSPuid) ?? "UIDNotFound";
+    _firstLogIn = preferences.getBool(kSPfirstLogIn) ?? true;
+    if(!_firstLogIn){
+      await _firestore.collection('OrganizerContainer').document(_uid).get().then((data) async{
+        home.setUsername(data.data['OrgName'].substring(0,data.data['OrgName'].indexOf(' ')));
+      });
+    }
   }
 }
 class ShapePainter extends CustomPainter{

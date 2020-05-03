@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digitaleventpass/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
 	imageUrl = user.photoUrl;
 	uid=user.uid;
 //	IntroScreen.setUid(user.uid);
+	home.setUid(user.uid);
 
 	assert(!user.isAnonymous);
 	assert(await user.getIdToken() != null);
@@ -46,7 +48,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
 	assert(user.uid == currentUser.uid);
 	print(user.uid);
 	print("successfully signed in");
-	await AddOrganizer(uid,name,email);
+//	await AddOrganizer(uid,name,email);
 	Globaldata.OrganizerID=user.uid;
 	return 'signInWithGoogle succeeded: $user';
 
@@ -59,14 +61,14 @@ void signOutGoogle() async {
 }
 
 
-void AddOrganizer(String uid, String name, String email) async{
+//void addOrganizer(String uid, String name, String email) async{
+//
+//	final _firestore = Firestore.instance;
+//	await _firestore.collection("Organizers").document(uid)
+//			.setData({
+//		'OrganizerName'   : name,
+//		'Organizeremail' : email,
+//		'is_profileset'  : false,
+//	});
 
-	final _firestore = Firestore.instance;
-	await _firestore.collection("Organizers").document(uid)
-			.setData({
-		'OrganizerName'   : name,
-		'Organizeremail' : email,
-		'is_profileset'  : false,
-	});
-
-}
+//}

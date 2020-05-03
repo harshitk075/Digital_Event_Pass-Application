@@ -91,7 +91,7 @@ class _LoginState extends State<Login> {
 //              },
 //            ),
 //          );
-          Navigator.pushNamed(context, "/organizerPage");
+          Navigator.pushNamed(context, "/createorgprofile");
         }) : Fluttertoast.showToast(msg: 'Please check your internet connection'));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

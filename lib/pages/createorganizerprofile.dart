@@ -1,22 +1,28 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digitaleventpass/pages/organizerpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
 import 'package:digitaleventpass/globals.dart';
+import 'package:digitaleventpass/sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constants.dart';
 
 class CreateOrganizerProfile extends StatefulWidget {
   @override
   _CreateOrganizerProfileState createState() => _CreateOrganizerProfileState();
 }
-
+final _firestore = Firestore.instance;
 class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
   File _image = null;
-  String orgID=Globaldata.OrganizerID;
+  String orgID = Globaldata.OrganizerID;
   String orgname;
   int   orgcontactNumber;
   String orgmailId;
@@ -77,15 +83,42 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
     Future PushToDb() async {
       //make guest object to reference at alter stage
-      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
-      await databaseReference.collection("OrganizerContainer").document(orgID).collection("Profile")
-          .add({
-            'OrgName'   : orgname,
-            'OrgmailId'  : orgmailId,
-            'OrgGender' : orggender,
-            'OrgContactNumber' : orgcontactNumber,
-            'OrgimgURL'        : orgimgurl,
-      });
+      bool isNewUser = true;
+      try {
+        await _firestore.collection('OrganizerContainer').document(uid).get().then((value) {
+          if (value.data['OrgmailId']!=null){
+            setState(() {
+              isNewUser=false;
+            });
+            _firestore.collection('OrganizerContainer').document(uid).updateData({
+              'OrgGender' : orggender,
+              'OrgContactNumber' : orgcontactNumber,
+            });
+          }
+        });
+      }
+      catch(e){
+        print('NEW USER');
+      }
+//      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
+      if(isNewUser) {
+        await databaseReference.collection("OrganizerContainer").document(uid)
+            .setData({
+          'OrgName': orgname,
+          'OrgmailId': orgmailId,
+          'OrgGender': orggender,
+          'OrgContactNumber': orgcontactNumber,
+          'OrgimgURL': orgimgurl,
+        });
+      }
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString(kSPuid, uid);
+      preferences.setBool(kSPfirstLogIn, false);
+
+      Fluttertoast.showToast(msg: 'Profile Saved Successfully',toastLength: Toast.LENGTH_SHORT);
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => organizerPage(mUid: uid,),));
+
       //when we have organizer ID
 //      .document("org-ID1223")
 //          .setData({
@@ -225,9 +258,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 onPressed: () async {
                   if(isphotoupload) {
                     await PushToDb();
-                    Guest.is_profileset = true;
+//                    Guest.is_profileset = true;
                     //update true in firestore also
-                    await setprofilestatus();
+//                    await setprofilestatus();
                     Navigator.pop(context);
                   }
                   else{
@@ -261,11 +294,11 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
   }
 }
 
-setprofilestatus() async {
-
-  final databaseReference = Firestore.instance;
-  await databaseReference.collection("Organizers").document(Globaldata.OrganizerID).updateData({
-    'is_profileset': true
-  });
-  
-}
+//setprofilestatus() async {
+//
+//  final databaseReference = Firestore.instance;
+//  await databaseReference.collection("Organizers").document(Globaldata.OrganizerID).updateData({
+//    'is_profileset': true
+//  });
+//
+//}
