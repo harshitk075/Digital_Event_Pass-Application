@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:typed_data';
+//import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class Ticket extends StatelessWidget {
 
+class Ticket extends StatelessWidget {
+	GlobalKey _renderObjectKey;
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -56,9 +61,12 @@ class Ticket extends StatelessWidget {
 										 ),
 									 ),
 									 SizedBox(height: 8.0,),
-									 QrImage(data: "SD",
+									 RepaintBoundary(
+										 key: _renderObjectKey,
+									   child: QrImage(data: "SD",
 										 version: QrVersions.auto,
 										 size: 200.0,
+									   ),
 									 ),
 									 Text("Registration no : "),
 									 SizedBox(height: 20.0),
@@ -110,5 +118,19 @@ class Ticket extends StatelessWidget {
 			),
 		);
 	}
+//	Future<Uint8List> _getWidgetImage() async {
+//		try {
+//			RenderRepaintBoundary boundary =
+//			_renderObjectKey.currentContext.findRenderObject();
+//			ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+//			ByteData byteData =
+//			await image.toByteData(format: ui.ImageByteFormat.png);
+//			var pngBytes = byteData.buffer.asUint8List();
+//			var bs64 = base64Encode(pngBytes);
+//			debugPrint(bs64.length.toString());
+//			final directory = (await getExternalStorageDirectory().path())
+//			return pngBytes;
+//		} catch (exception) {}
+//	}
 }
 

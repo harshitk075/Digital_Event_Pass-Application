@@ -42,6 +42,8 @@ dependencies:
   fluttertoast: ^4.0.1
   google_sign_in: ^4.4.4
   firebase_storage: ^3.1.5
+  url_launcher: ^5.4.5
+  flutter_email_sender: ^3.0.1
 
 dev_dependencies:
   flutter_test:

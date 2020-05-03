@@ -55,7 +55,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
 
   final databaseReference = Firestore.instance;
   Future SaveEvent() async {
-    await uploadImage();
+//    await uploadImage();
     //print(imageUrl);
     await databaseReference.collection("OrganizerContainer").document(Globaldata.OrganizerID).collection("Events")
           .add({

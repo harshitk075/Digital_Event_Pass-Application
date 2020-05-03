@@ -3,6 +3,7 @@ import 'package:digitaleventpass/pages/display_event.dart';
 import 'package:digitaleventpass/pages/eventupdations.dart';
 import 'package:digitaleventpass/pages/location_picker.dart';
 import 'package:digitaleventpass/pages/qr_utilitty.dart';
+import 'package:digitaleventpass/pages/tempo.dart';
 import 'package:digitaleventpass/pages/user/ticket_template.dart';
 import 'package:digitaleventpass/pages/viewprofile.dart';
 import 'package:digitaleventpass/pages/loginpage.dart';
@@ -38,7 +39,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/",
+   initialRoute: "/temporary",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
@@ -55,6 +56,7 @@ void main() => runApp(MaterialApp(
      "/createorgprofile":(context)=> CreateOrganizerProfile(),
      "/eventupdations" : (context)=>EventUpdations(),
      "/makelist"       : (context)=>MakeList(),
+     "/temporary" : (context)=> Temporaryscreen(),
    },
 ));
 
