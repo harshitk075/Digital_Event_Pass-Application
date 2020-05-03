@@ -33,7 +33,7 @@ class _EventDisplayState extends State<EventDisplay> {
 
 
   int _selectedIndex = 0;
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index){
     if(index==0)
     {
       Navigator.pop(context);
