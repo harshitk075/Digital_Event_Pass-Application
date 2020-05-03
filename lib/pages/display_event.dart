@@ -17,6 +17,7 @@ class _EventDisplayState extends State<EventDisplay> {
   String evenue;
   double duration;
   String description;
+  String ImageURL;
   @override
   void initState() {
 
@@ -26,6 +27,7 @@ class _EventDisplayState extends State<EventDisplay> {
     evenue= newref.eventvenue;
     duration= newref.duration;
     description=newref.eventDescription;
+    ImageURL= newref.imageUrl;
     super.initState();
   }
 
@@ -57,12 +59,20 @@ class _EventDisplayState extends State<EventDisplay> {
                 child: Container(
                   height: 250.0,
                   width: 200.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    image: DecorationImage(
-                      image: NetworkImage("https://www.womensbusinessdaily.com/wp-content/uploads/2017/07/Messe_Luzern_Corporate_Event.jpg"),
-                      fit: BoxFit.cover,
-                    )
+                  child: Image.network(
+                    ImageURL,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null)
+                        return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                              : null,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
