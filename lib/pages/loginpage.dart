@@ -41,20 +41,6 @@ class _LoginState extends State<Login> {
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        icon: const Icon(Icons.email),
-                        hintText: 'Enter Registered Email',
-                        labelText: 'E- mail',
-                      ),
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        icon: const Icon(Icons.edit),
-                        hintText: 'Enter Password',
-                        labelText: 'Password',
-                      ),
-                    ),
                     SizedBox(height: 30.0),
                     _signInButton(),
 //                           RaisedButton.icon(

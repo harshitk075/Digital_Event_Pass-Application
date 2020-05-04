@@ -1,3 +1,4 @@
+import 'package:digitaleventpass/pages/qr_utilitty.dart';
 import 'package:flutter/material.dart';
 
 class EventUpdations extends StatefulWidget {
@@ -50,7 +51,9 @@ class _EventUpdationsState extends State<EventUpdations> {
             children: <Widget>[
                GestureDetector(
                  onTap: (){
-                   Navigator.pushNamed(context, "/qrutility");
+                   Navigator.push(context,
+                       MaterialPageRoute(
+                           builder: (context) => QrUtility(EventID: EventID)));
                  },
                  child: Container(
                    height: 150.0,

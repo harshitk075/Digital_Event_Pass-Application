@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/post_class.dart';
 
@@ -18,6 +19,10 @@ class _EventDisplayState extends State<EventDisplay> {
   double duration;
   String description;
   String ImageURL;
+  String Orgname;
+  int Orgnumber;
+  String Orgemail;
+  String time;
   @override
   void initState() {
 
@@ -28,6 +33,10 @@ class _EventDisplayState extends State<EventDisplay> {
     duration= newref.duration;
     description=newref.eventDescription;
     ImageURL= newref.imageUrl;
+    Orgname= newref.Orgname;
+    Orgnumber=newref.Orgnumber;
+    Orgemail=newref.Orgemail;
+    time = newref.time;
     super.initState();
   }
 
@@ -78,8 +87,27 @@ class _EventDisplayState extends State<EventDisplay> {
               ),
             ),
             SizedBox(height: 20.0),
-            Center(child: Text(ename,style: TextStyle(letterSpacing: 3.0,fontSize: 15.0),)),
-            SizedBox(height: 20.0),
+            Center(child: Text(ename.toUpperCase(),style: TextStyle(
+                letterSpacing: 3.0,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+               ),
+              ),
+            ),
+            Divider(thickness: 5.0,),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "/ticket");
+                },
+                color: Theme.of(context).accentColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("OPEN QR CODE ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
+                ),
+              ),
+            ),
             Column(
               children: <Widget>[
                 Row(
@@ -89,13 +117,26 @@ class _EventDisplayState extends State<EventDisplay> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        color: Colors.grey[700],
+                        color: Colors.black,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("Event organizer"),
-                          Text("##Organizer name"),
+                          Text("Event organizer",
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                                backgroundColor: Colors.grey,
+                            ),
+                          ),
+                          Text(Orgname.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -103,11 +144,54 @@ class _EventDisplayState extends State<EventDisplay> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        color: Colors.grey[700],
-                        image: DecorationImage(
-                          image: NetworkImage("https://avatars1.githubusercontent.com/u/47221273?s=460&u=e86600f2266d871277b266cd11092f9778f4c496&v=4"),
-                          fit: BoxFit.cover,
-                        )
+                        color: Colors.black,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              "CONTACT NUMBER",
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 2.0,
+                                fontSize: 12.0,
+                                backgroundColor: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              "$Orgnumber",
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 2.0,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              "Email-ID",
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 2.0,
+                                fontSize: 12.0,
+                                backgroundColor: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              Orgemail,
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 2.0,
+                                fontSize: 13.0,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     )
                   ],
@@ -120,13 +204,27 @@ class _EventDisplayState extends State<EventDisplay> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        color: Colors.grey[700],
+                        color: Colors.black,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("VENUE"),
-                          Text(evenue),
+                          Text("VENUE",
+                         style: TextStyle(
+                        color: Colors.white,
+                        letterSpacing: 2.0,
+                        fontSize: 15.0,
+                           backgroundColor: Colors.grey,
+                         ),
+                       ),
+                          Text(
+                              evenue.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -134,13 +232,28 @@ class _EventDisplayState extends State<EventDisplay> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        color: Colors.grey[700],
+                        color: Colors.black,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("DATE AND TIME"),
-                          Text("##DATE AND TIME HERE"),
+                          Text(
+                              "DATE AND TIME",
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                              backgroundColor: Colors.grey,
+                            ),
+                          ),
+                          Text(
+                             time.substring(0,16),
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -154,13 +267,28 @@ class _EventDisplayState extends State<EventDisplay> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        color: Colors.grey[700],
+                        color: Colors.black,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("EVENT TYPE"),
-                          Text(etype),
+                          Text(
+                            "EVENT TYPE",
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                              backgroundColor: Colors.grey
+                            ),
+                          ),
+                          Text(
+                            etype.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -168,13 +296,29 @@ class _EventDisplayState extends State<EventDisplay> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        color: Colors.grey[700],
+                        color: Colors.black,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("EVENT DURATION"),
-                          Text("$duration"),
+                          Center(
+                            child: Text("   EVENT \n DURATION",
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 2.0,
+                                fontSize: 15.0,
+                                backgroundColor: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          Text(
+                              "   $duration \n minutes",
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontSize: 15.0,
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/date_time_picker.dart';
-import 'package:digitaleventpass/pages/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,8 +8,7 @@ import 'package:digitaleventpass/post_class.dart';
 import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
-import 'package:digitaleventpass/globals.dart';
-
+import 'package:digitaleventpass/pages/home.dart';
 class CreateNewEvent extends StatefulWidget {
   @override
   _CreateNewEventState createState() => _CreateNewEventState();
@@ -55,9 +53,9 @@ class _CreateNewEventState extends State<CreateNewEvent> {
 
   final databaseReference = Firestore.instance;
   Future SaveEvent() async {
-//    await uploadImage();
+    await uploadImage();
     //print(imageUrl);
-    await databaseReference.collection("OrganizerContainer").document(Globaldata.OrganizerID).collection("Events")
+    await databaseReference.collection("OrganizerContainer").document(home.getUid()).collection("Events")
           .add({
       "eventname": eventname,
       "eventtype": eventtype,
@@ -66,6 +64,10 @@ class _CreateNewEventState extends State<CreateNewEvent> {
       "imageurl"  : imageUrl,
       "eventdescription" : description,
       "eventTimeAndDate" : time.toString(),
+      "Orgname":  home.getUsername(),
+      "Orgnumber": home.getnumber(),
+      "Orgemail"  : home.getemail(),
+
     });
 
     await databaseReference.collection("events")
@@ -77,8 +79,10 @@ class _CreateNewEventState extends State<CreateNewEvent> {
       "imageurl"  : imageUrl,
       "eventdescription" : description,
       "eventTimeAndDate" : time.toString(),
+      "Orgname":  home.getUsername(),
+      "Orgnumber": home.getnumber(),
+      "Orgemail"  : home.getemail(),
     });
-    Navigator.pop(context);
   }
 
   @override

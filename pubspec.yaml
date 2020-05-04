@@ -76,6 +76,8 @@ flutter:
     - assets/list.png
     - assets/change_profile.png
     - assets/google_logo.jpg
+    - assets/verified.png
+    - assets/notverified.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

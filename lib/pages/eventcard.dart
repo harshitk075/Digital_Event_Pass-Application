@@ -6,8 +6,8 @@ import 'package:digitaleventpass/Services/dispalyfunctions.dart';
 import 'package:digitaleventpass/post_class.dart';
 class EventCard extends StatelessWidget {
 
-	final String event,venue,eventID,eventimageurl, route;
-	EventCard({this.event,this.venue,this.eventID,this.eventimageurl,this.route});
+	final String event,venue,eventID,eventimageurl,eventtime, route;
+	EventCard({this.event,this.venue,this.eventID,this.eventimageurl,this.eventtime,this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +80,13 @@ class EventCard extends StatelessWidget {
 									],
 								),
 								SizedBox(height: 15.0,),
-//								 Row(
-//									mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//									children: <Widget>[
-//										Text("DATE AND TIME"),
-//										Text(time),
-//									],
-//								),
+								 Row(
+									mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+									children: <Widget>[
+										Text("DATE AND TIME"),
+										Text(eventtime.substring(0,16)),
+									],
+								),
 					  	],
 					  ),
 					),

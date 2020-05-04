@@ -9,7 +9,12 @@ import 'package:digitaleventpass/constants.dart';
 bool _firstLogIn;
 String _uid;
 String _username;
+String _email;
+int _number;
+String _gender;
+String _url;
 bool fetchingData=false;
+
 final _firestore = Firestore.instance;
 class home extends StatefulWidget {
   static String getUid()=>_uid;
@@ -20,6 +25,27 @@ class home extends StatefulWidget {
   static void setUsername(String username){
     _username=username;
   }
+
+  static String getemail()=>_email;
+  static void setemail(String email){
+    _email=email;
+  }
+
+  static int getnumber()=>_number;
+  static void setnumber(int number){
+    _number= number;
+  }
+
+  static String getgender()=>_gender;
+  static void setgender(String gender){
+    _gender= gender;
+  }
+
+  static String geturl()=>_url;
+  static void seturl(String url){
+    _url= url;
+  }
+
   @override
   _homeState createState() => _homeState();
 }

@@ -6,6 +6,7 @@ import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:digitaleventpass/sign_in.dart';
 import 'package:digitaleventpass/pages/loginpage.dart';
 import 'package:digitaleventpass/globals.dart';
+import 'package:digitaleventpass/pages/home.dart';
 
 class organizerPage extends StatefulWidget {
   final String mUid;
@@ -202,7 +203,7 @@ class _organizerPageState extends State<organizerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Hi ##NAMEorganizer",
+                     "Hi!  ${home.getUsername().toUpperCase()}",
                     style: TextStyle(
                       color: Colors.white,
                       letterSpacing: 2.0,
@@ -266,8 +267,14 @@ class _organizerPageState extends State<organizerPage> {
 
   void fetchProfileData() async {
     final _firestore = Firestore.instance;
-    var document = await _firestore.collection('OriganizerContainer').document(widget.mUid).get();
-    print(document.data);
-    home.setUsername(document.data['OrgName'].substring(0,document.data['OrgName'].indexOf(' ')));
+    //print(widget.mUid);
+     var document = await _firestore.collection('OrganizerContainer').document(widget.mUid).get();
+     print(document.data);
+     home.setUsername(document.data['OrgName']);
+     home.setnumber(document.data['OrgContactNumber']);
+     home.setgender(document.data['OrgGender']);
+     home.setemail(document.data['OrgmailId']);
+     home.seturl(document.data['OrgimgURL']);
+     //print(document.data['OrgmailId']);
   }
 }
