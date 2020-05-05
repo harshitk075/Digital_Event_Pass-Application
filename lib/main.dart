@@ -14,22 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:digitaleventpass/pages/home.dart';
 import 'package:digitaleventpass/pages/organizerpage.dart';
 import 'package:digitaleventpass/pages/user/userpage.dart';
-import 'package:google_map_location_picker/generated/i18n.dart' as location_picker;
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:digitaleventpass/pages/eventinviteelist.dart';
 
 
 void main() => runApp(MaterialApp(
-  localizationsDelegates: const [
-    location_picker.S.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ],
-  supportedLocales: const <Locale>[
-    Locale('en', ''),
-    Locale('ar', ''),
-  ],
   title: "Digital Event Pass",
    theme: ThemeData(
      primaryColor: Colors.cyan[300],

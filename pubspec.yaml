@@ -36,9 +36,8 @@ dependencies:
   animated_text_kit: ^2.0.0
   intl: ^0.16.0
   qr_flutter: ^3.2.0
-  image_picker: ^0.6.5+3
+  image_picker: ^0.6.6+1
   datetime_picker_formfield: ^1.0.0
-  google_map_location_picker: ^3.3.0
   fluttertoast: ^4.0.1
   google_sign_in: ^4.4.4
   firebase_storage: ^3.1.5
