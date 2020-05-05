@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/pages/organizerpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -102,22 +101,29 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
       }
 //      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
       if(isNewUser) {
-        await databaseReference.collection("OrganizerContainer").document(uid)
-            .setData({
-          'OrgName': orgname,
-          'OrgmailId': orgmailId,
-          'OrgGender': orggender,
-          'OrgContactNumber': orgcontactNumber,
-          'OrgimgURL': orgimgurl,
-        });
-      }
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      preferences.setString(kSPuid, uid);
-      preferences.setBool(kSPfirstLogIn, false);
+        if (orgcontactNumber != null && orgname != null && orggender != null &&
+            orgimgurl != null && orgmailId != null) {
+          await databaseReference.collection("OrganizerContainer").document(uid)
+              .setData({
+            'OrgName': orgname,
+            'OrgmailId': orgmailId,
+            'OrgGender': orggender,
+            'OrgContactNumber': orgcontactNumber,
+            'OrgimgURL': orgimgurl,
+          });
+        }
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        preferences.setString(kSPuid, uid);
+        preferences.setBool(kSPfirstLogIn, false);
 
-      Fluttertoast.showToast(msg: 'Profile Saved Successfully',toastLength: Toast.LENGTH_SHORT);
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) => organizerPage(mUid: uid,),));
+        Fluttertoast.showToast(
+            msg: 'Profile Saved Successfully', toastLength: Toast.LENGTH_SHORT);
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => organizerPage(mUid: uid,),));
+      }else{
+        Fluttertoast.showToast(
+            msg: 'All fields are mandatory', toastLength: Toast.LENGTH_SHORT);
+      }
 
     }
 
