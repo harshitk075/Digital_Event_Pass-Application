@@ -16,7 +16,11 @@ import 'package:digitaleventpass/globals.dart';
       String des= datasnapshot.data['eventdescription'];
       String etype= datasnapshot.data['eventtype'];
       String eurl= datasnapshot.data['imageurl'];
-      obj = Post(Id,ename,evenue,etype,dur,des,eurl);
+      String Orgname= datasnapshot.data['Orgname'];
+      int Orgnumber= datasnapshot.data['Orgnumber'];
+      String Orgemail= datasnapshot.data['Orgemail'];
+      String time = datasnapshot.data['eventTimeAndDate'].toString();
+      obj = Post(Id,ename,evenue,etype,dur,des,eurl,Orgname,Orgnumber,Orgemail,time);
     });
     return obj;
   }

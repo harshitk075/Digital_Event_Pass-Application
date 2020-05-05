@@ -51,8 +51,8 @@ class _userPageState extends State<userPage> {
         eventVenue = message.data['eventvenue']??'Message Text Unavailable';
         eventName = message.data['eventname']??'Event Unavailable';
         eventimgURL= message.data['imageurl']??'No Image';
-//      eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
-        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, eventimageurl: eventimgURL, route: "/eventdisplay"));
+        String eventDateAndTime = message.data['eventTimeAndDate'].toString()??'Time and date not Unavailable';
+        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, eventimageurl: eventimgURL,eventtime: eventDateAndTime, route: "/eventdisplay"));
       }
       setState(() {
         eventList = newUpdatesList;

@@ -1,28 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:qrcode/qrcode.dart';
-
+import 'package:digitaleventpass/pages/home.dart';
 class QrUtility extends StatefulWidget {
+
+	final String EventID;
+	QrUtility({Key key,@required this.EventID}):super(key: key);
+	
   @override
   _QrUtilityState createState() => _QrUtilityState();
 }
 
 class _QrUtilityState extends State<QrUtility> {
 	QRCaptureController _captureController = QRCaptureController();
-
+  String EventID;
 	bool _isTorchOn = false;
+	final _firestore = Firestore.instance;
 	@override
 	void initState() {
+		 EventID = widget.EventID;
+		_captureController.onCapture((data)  async {
+			_captureController.pause();
 
-
-		_captureController.onCapture((data) {
-			print('onCapture----$data');
+			var document = await _firestore.collection('OrganizerContainer').document(home.getUid()).
+			collection("Events").document(EventID).collection("Inviteelist").document(data).get();
+			print(document.data);
+			if(document.data==null){
+				_captureController.pause();
+				await Navigator.pushNamed(context, "/notverified");
+				_captureController.resume();
+			}
+			else{
+				    var doc=  await _firestore.collection('OrganizerContainer').document(home.getUid()).
+						collection("Events").document(EventID).collection("Inviteelist").document(data).get();
+				    //var x= doc.get();
+				    if(doc.data["isverified"]==false) {
+							_firestore.collection('OrganizerContainer').document(home.getUid()).
+							collection("Events").document(EventID).collection("Inviteelist").document(data).updateData({
+								'Timestamp' : Timestamp.now(),
+								'isverified' : true,
+							});
+							await Navigator.pushNamed(context,"/verified");
+							_captureController.resume();
+				    }
+				    else{
+							await Navigator.pushNamed(context, "/notverified");
+							_captureController.resume();
+						}
+			}
+			//print(document.data['OrgmailId']);
 		});
 		super.initState();
 	}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
 			body: Stack(
 			alignment: Alignment.center,
 			children: <Widget>[

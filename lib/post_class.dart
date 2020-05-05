@@ -1,14 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Post {
 	String _eventID;
 	String _eventname;
 	String _eventvenue;
 	String _eventtype;
-	DateTime _eventdateandtime;
+	String _eventdateandtime;
 	double _duration;
 	String _eventDescription;
 	String _imageUrl;
-
-	Post(this._eventID, this._eventname, this._eventvenue,this._eventtype, this._duration, this._eventDescription,this._imageUrl);
+  String  _Orgname;
+  int _Orgnumber;
+  String _Orgemail;
+	Post(this._eventID, this._eventname, this._eventvenue,this._eventtype, this._duration, this._eventDescription,this._imageUrl,this._Orgname,this._Orgnumber,this._Orgemail,this._eventdateandtime);
 
 	String get eventID => _eventID;
 
@@ -21,6 +25,14 @@ class Post {
 	String get eventtype => _eventtype;
 
 	String get imageUrl => _imageUrl;
+
+	String get Orgname => _Orgname;
+
+	int get Orgnumber => _Orgnumber;
+
+	String get Orgemail=> _Orgemail;
+
+	String get time => _eventdateandtime;
 
 	set imageUrl(String value) {
 		_imageUrl = value;
@@ -38,11 +50,6 @@ class Post {
 		_duration = value;
 	}
 
-	DateTime get eventdateandtime => _eventdateandtime;
-
-	set eventTime(DateTime value) {
-		_eventdateandtime = value;
-	}
 
 	String get eventvenue => _eventvenue;
 

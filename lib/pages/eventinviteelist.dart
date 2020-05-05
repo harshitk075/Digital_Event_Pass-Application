@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/globals.dart';
+import 'package:digitaleventpass/pages/home.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class MakeList extends StatefulWidget {
   @override
@@ -14,18 +16,21 @@ class _MakeListState extends State<MakeList> {
   String User_email;
 
   final _firestore = Firestore.instance;
+  String currentInviteeCode;
 
-  Future PushToDb(User x,String IDorg) async {
-    await _firestore.collection("OrganizerContainer").document(Globaldata.OrganizerID).collection("Events").document(IDorg).collection('Inviteelist')
+  Future PushToDb(User x,String IDevent) async {
+    await _firestore.collection("OrganizerContainer").document(home.getUid()).collection("Events").document(IDevent).collection('Inviteelist')
         .add({
-        'InviteeName'   : x.name,
-      'InviteemailId' : x.email,
-    });
+        'InviteeName' : x.name,
+        'InviteemailId' : x.email,
+        'Timestamp'   : null,
+        'isverified' :  false,
+    }).then((value) =>  currentInviteeCode=value.documentID);
   }
 
   Future<List<User>> _getuser(String ID) async {
     List<User> newUpdatesList = [];
-    await for(var snapshot in _firestore.collection('OrganizerContainer').document(Globaldata.OrganizerID).collection("Events").
+    await for(var snapshot in _firestore.collection('OrganizerContainer').document(home.getUid() ).collection("Events").
         document(ID).collection('Inviteelist').snapshots())
     {
       //print(snapshot.documents.length);
@@ -42,8 +47,40 @@ class _MakeListState extends State<MakeList> {
     return newUpdatesList;
   }
 
+  // mailsend utility
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Future<void> sendemail(User u) async  {
+    String name= u.name;
+    String mailID=u.email;
+
+    List<String> recipients = new List();
+    recipients.add(mailID);
+    final Email email = Email(
+      body: "Hey $name you are cordially invited to my event.Here is your UniqueID to get entry $currentInviteeCode",
+      subject: "Invitation to my Event",
+      recipients: recipients,
+      isHTML: false,
+    );
+    String platformResponse;
+
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      platformResponse = error.toString();
+    }
+
+    if (!mounted) return;
+
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(platformResponse),
+    ));
+  }
+
+
   Future adduser(User u,String IDorg) async{
      await PushToDb(u,IDorg);
+     await sendemail(u);
     setState(() {
     });
   }
@@ -119,10 +156,14 @@ class _MakeListState extends State<MakeList> {
                            if(n!=null && e!=null){
                              User x= User(name: n, email: e);
                              await adduser(x,ID);
+                              setState(() {
+                                User_name=null;
+                                User_email=null;
+                                _controller1.clear();
+                                _controller2.clear();
+                              });
                              //print(n+" "+e);
                            }
-                           _controller1.clear();
-                           _controller2.clear();
                          },
                          icon:Icon(Icons.add),
                          label: Text("ADD AS INVITEE"),

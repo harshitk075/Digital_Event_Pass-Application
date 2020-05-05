@@ -119,15 +119,6 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => organizerPage(mUid: uid,),));
 
-      //when we have organizer ID
-//      .document("org-ID1223")
-//          .setData({
-//      'OrgName'   : orgname,
-//      'OrgmaiId'  : orgmailId,
-//      'OrgGender' : orggender,
-//      'OrgContactNumber' : orgcontactNumber,
-//      'OrgimgURL'        : orgimgurl,
-//      });
     }
 
   @override
@@ -168,6 +159,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                       splashColor: Colors.blueAccent,
                       onPressed: () async {
                         await uploadImage();
+                        Fluttertoast.showToast(msg: 'Image Uploaded Successfully',toastLength: Toast.LENGTH_SHORT);
                       },
                       child: Text(
                         "  Upload  ",
@@ -258,13 +250,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 onPressed: () async {
                   if(isphotoupload) {
                     await PushToDb();
-//                    Guest.is_profileset = true;
-                    //update true in firestore also
-//                    await setprofilestatus();
-                    Navigator.pop(context);
                   }
                   else{
-                    print("Upload image");
+                    Fluttertoast.showToast(msg: 'Upload Image first',toastLength: Toast.LENGTH_SHORT);
                   }
                 },
                 color: Theme.of(context).accentColor,
@@ -293,12 +281,3 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
     );
   }
 }
-
-//setprofilestatus() async {
-//
-//  final databaseReference = Firestore.instance;
-//  await databaseReference.collection("Organizers").document(Globaldata.OrganizerID).updateData({
-//    'is_profileset': true
-//  });
-//
-//}

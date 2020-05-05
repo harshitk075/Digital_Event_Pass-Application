@@ -1,5 +1,7 @@
+import 'package:digitaleventpass/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:digitaleventpass/pages/home.dart';
 
 class ViewProfile extends StatefulWidget {
   @override
@@ -8,7 +10,11 @@ class ViewProfile extends StatefulWidget {
 
 class _ViewProfileState extends State<ViewProfile> {
 
-	String gender= "male";
+	String gender= home.getgender();
+	String Orgname= home.getUsername();
+  int number=  home.getnumber();
+	String mailid =home.getemail();
+  String imgurl=home.geturl();
 
 	int _selectedIndex = 0;
 	void _onItemTapped(int index) {
@@ -34,12 +40,12 @@ class _ViewProfileState extends State<ViewProfile> {
 					SizedBox(height: 10.0,),
 					Center(
 						child: CircleAvatar(
-							backgroundImage: NetworkImage("https://avatars1.githubusercontent.com/u/47221273?s=460&u=e86600f2266d871277b266cd11092f9778f4c496&v=4"),
+							backgroundImage: NetworkImage(imgurl),
 							maxRadius: 100.0,
 						),
 					),
 					SizedBox(height: 20.0,),
-					Center(child: Text("##NAMEORGANIZER",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,letterSpacing: 2.0),)),
+					Center(child: Text(Orgname,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,letterSpacing: 2.0),)),
 					SizedBox(height: 30.0,),
 					Row(
 						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,7 +55,7 @@ class _ViewProfileState extends State<ViewProfile> {
 								),
 							SizedBox(width: 30.0,),
 							Text(
-								"##EMIAL"
+								mailid,
 							)
 						],
 					),
@@ -62,7 +68,7 @@ class _ViewProfileState extends State<ViewProfile> {
 							),
 							SizedBox(width: 30.0,),
 							Text(
-									"##Number"
+									"$number",
 							)
 						],
 					),
@@ -71,7 +77,7 @@ class _ViewProfileState extends State<ViewProfile> {
 						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 						children: <Widget>[
 							Text(
-									"Gender"
+									gender
 							),
 							SizedBox(width: 30.0,),
 							(gender=="male" || gender=="MALE") ? Icon(FontAwesomeIcons.male,size: 40.0,color: Theme.of(context).accentColor): Icon(FontAwesomeIcons.female,size: 40.0,color: Theme.of(context).accentColor),

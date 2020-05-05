@@ -6,6 +6,7 @@ import 'package:digitaleventpass/pages/user/columntemplate.dart';
 import 'package:digitaleventpass/pages/eventcard.dart';
 import 'package:intl/intl.dart';
 import 'package:digitaleventpass/globals.dart';
+import 'package:digitaleventpass/pages/home.dart';
 
 class ManageEvent extends StatefulWidget {
   @override
@@ -33,13 +34,12 @@ class _ManageEventState extends State<ManageEvent> {
 
   @override
   void initState() {
-
     fetchUpdates();
     super.initState();
   }
 
   void fetchUpdates() async{
-    await for(var snapshot in _firestore.collection('OrganizerContainer').document(Globaldata.OrganizerID).collection("Events").orderBy('eventTimeAndDate', descending: true).snapshots())
+    await for(var snapshot in _firestore.collection('OrganizerContainer').document(home.getUid()).collection("Events").orderBy('eventTimeAndDate', descending: true).snapshots())
     {
       List<EventCard> newUpdatesList = [];
       print(snapshot.documents.length);
@@ -51,8 +51,8 @@ class _ManageEventState extends State<ManageEvent> {
         eventVenue = message.data['eventvenue']??'Message Text Unavailable';
         eventName = message.data['eventname']??'Event Unavailable';
         String eventimgURL= message.data['imageurl']??'No Image';
-//        eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
-        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, eventimageurl: eventimgURL, route: "/eventupdations",));
+        String eventDateAndTime = message.data['eventTimeAndDate']??'Time and date not Unavailable';
+        newUpdatesList.add(EventCard(event: eventName,venue: eventVenue,eventID: EventID, eventimageurl: eventimgURL, eventtime: eventDateAndTime, route: "/eventupdations",));
       }
       setState(() {
         eventList = newUpdatesList;
