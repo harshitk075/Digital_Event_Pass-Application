@@ -111,20 +111,21 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
             'OrgContactNumber': orgcontactNumber,
             'OrgimgURL': orgimgurl,
           });
+
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+          preferences.setString(kSPuid, uid);
+          preferences.setBool(kSPfirstLogIn, false);
+
+          Fluttertoast.showToast(
+              msg: 'Profile Saved Successfully',
+              toastLength: Toast.LENGTH_SHORT);
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => organizerPage(mUid: uid,),));
+        } else {
+          Fluttertoast.showToast(
+              msg: 'All fields are mandatory', toastLength: Toast.LENGTH_SHORT);
         }
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setString(kSPuid, uid);
-        preferences.setBool(kSPfirstLogIn, false);
-
-        Fluttertoast.showToast(
-            msg: 'Profile Saved Successfully', toastLength: Toast.LENGTH_SHORT);
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) => organizerPage(mUid: uid,),));
-      }else{
-        Fluttertoast.showToast(
-            msg: 'All fields are mandatory', toastLength: Toast.LENGTH_SHORT);
       }
-
     }
 
   @override
