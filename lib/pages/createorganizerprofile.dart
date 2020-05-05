@@ -101,8 +101,6 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
       }
 //      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
       if(isNewUser) {
-        if (orgcontactNumber != null && orgname != null && orggender != null &&
-            orgimgurl != null && orgmailId != null) {
           await databaseReference.collection("OrganizerContainer").document(uid)
               .setData({
             'OrgName': orgname,
@@ -121,11 +119,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               toastLength: Toast.LENGTH_SHORT);
           Navigator.push(context, MaterialPageRoute(
             builder: (context) => organizerPage(mUid: uid,),));
-        } else {
-          Fluttertoast.showToast(
-              msg: 'All fields are mandatory', toastLength: Toast.LENGTH_SHORT);
         }
-      }
     }
 
   @override
