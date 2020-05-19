@@ -203,7 +203,7 @@ class _organizerPageState extends State<organizerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                     "Hi!  ${home.getUsername().toUpperCase()}",
+                     "Hi!  ${home.getUsername()}",
                     style: TextStyle(
                       color: Colors.white,
                       letterSpacing: 2.0,
