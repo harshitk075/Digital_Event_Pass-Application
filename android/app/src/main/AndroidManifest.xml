@@ -46,7 +46,7 @@
             android:value="2" />
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBpMAnXpVYhjIWRNbizunOVuH4TzYwbkuk"/>
+            android:value="AIzaSyCMdDt4vVq7KSWy_jAq4ZGFsbylDj5lNDM"/>
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>

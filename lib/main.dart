@@ -15,6 +15,7 @@ import 'package:digitaleventpass/pages/home.dart';
 import 'package:digitaleventpass/pages/organizerpage.dart';
 import 'package:digitaleventpass/pages/user/userpage.dart';
 import 'package:digitaleventpass/pages/eventinviteelist.dart';
+import 'map_activity.dart';
 
 
 void main() => runApp(MaterialApp(
@@ -24,7 +25,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/",
+   initialRoute: "/map",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
@@ -42,6 +43,7 @@ void main() => runApp(MaterialApp(
      "/makelist"       : (context)=>MakeList(),
      "/verified"       : (context)=>Verified(),
      "/notverified"    :(context)=> NotVerified(),
+     "/map": (context)=> MapActivity(),
    },
 ));
 
