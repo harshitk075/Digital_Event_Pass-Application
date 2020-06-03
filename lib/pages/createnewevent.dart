@@ -153,6 +153,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                         hintText: 'Enter Event Name',
                         labelText: 'Event Name',
                       ),
+                      validator: (value) => value.isEmpty? 'Name cannot be empty':null,
                       onChanged: (value) {
                         setState(() {
                           eventname = value;
@@ -210,6 +211,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                         hintText: 'Enter duration of event',
                         labelText: 'Duration in minutes',
                       ),
+                      validator: (value) => value.isEmpty? 'Name cannot be empty':null,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
                         setState(() {
@@ -222,7 +224,9 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                         icon: const Icon(Icons.location_on),
                         hintText: 'Enter venue',
                         labelText: 'Veneue',
+
                       ),
+                      validator: (value) => value.isEmpty? 'Name cannot be empty':null,
                       onChanged: (value) {
                         setState(() {
                           venue = value;
@@ -234,8 +238,9 @@ class _CreateNewEventState extends State<CreateNewEvent> {
                         color: Colors.grey[200],
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: TextField(
+                          child: TextFormField(
                             maxLines: 8,
+                            validator: (value) => value.isEmpty? 'Name cannot be empty':null,
                             decoration: InputDecoration.collapsed(
                                 hintText: "Add Event Description"),
                             onChanged: (value) {

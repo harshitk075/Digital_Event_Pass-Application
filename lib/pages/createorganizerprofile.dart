@@ -116,7 +116,8 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
       preferences.setBool(kSPfirstLogIn, false);
 
       Fluttertoast.showToast(msg: 'Profile Saved Successfully',toastLength: Toast.LENGTH_SHORT);
-      Navigator.push(context, MaterialPageRoute(
+//      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) => organizerPage(mUid: uid,),));
 
     }
@@ -175,23 +176,26 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
+
                             labelText: 'Name',
                           ),
+                          validator: (value) => value.isEmpty? 'Name cannot be empty':null,
                           onChanged: (text) {
                             setState(() {
                               orgname= text;
                             });
                           },
                         ),
-                        TextField(
+                        TextFormField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Contact Number',
                           ),
                           keyboardType: TextInputType.number,
+                          validator: (value) => value.isEmpty? 'Name cannot be empty':null,
                           onChanged: (value) {
                             setState(() {
                               orgcontactNumber= int.parse(value);
@@ -205,7 +209,8 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
               ],
             ),
             SizedBox(height: 10.0,),
-            TextField(
+            TextFormField(
+              validator: (value) => value.isEmpty? 'Name cannot be empty':null,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Email-ID',
