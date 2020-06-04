@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapActivity extends StatefulWidget {
@@ -12,8 +13,10 @@ class MapActivity extends StatefulWidget {
 class _MapActivityState extends State<MapActivity> {
   Completer<GoogleMapController> _controller = Completer();
   List<Marker> allMarkers = [];
-
+  String address;
+  String searchString;
   static Position position;
+  static LatLng positionx;
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(51.5074, 0.1278),
     zoom: 14.4746,
@@ -22,20 +25,44 @@ class _MapActivityState extends State<MapActivity> {
       bearing: 192.8334901395799,
       target: LatLng(21.9254986, 78.1152833),
       tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+      zoom: 14.151926040649414);
   void getLocation() async{
+    List<Placemark> placemark;
     try {
       position = await Geolocator().getCurrentPosition(
           desiredAccuracy: LocationAccuracy.medium);
-      double distanceInMeters = await Geolocator().distanceBetween(52.2165157, 6.9437819, 52.3546274, 4.8285838);
-      print(distanceInMeters);
-//      List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(21.9254986, 78.1152833);
-      List<Placemark> placemark = await Geolocator().placemarkFromAddress("Amla, Madhya Pradesh");
+//      double distanceInMeters = await Geolocator().distanceBetween(52.2165157, 6.9437819, 52.3546274, 4.8285838);
+//      print(distanceInMeters);
+       placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
+//      List<Placemark> placemark = await Geolocator().placemarkFromAddress("Amla, Madhya Pradesh");
       print("xxxxxxxxxxxxxxxxx");
-      print(placemark[0].position);
+      print(placemark[0].name);
+
+
     }catch(e){
       print(e);
     }
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(position.latitude,position.longitude),
+        zoom: 14.151926040649414
+    ),),);
+    setState(() {
+      allMarkers.clear();
+      address = placemark[0].name;
+      allMarkers.add(Marker(
+        markerId: MarkerId('myMarker1'),
+        draggable: true,
+        position: LatLng(position.latitude, position.longitude),
+        onDragEnd: (newPosition) {
+          print(newPosition.toString());
+          positionx = newPosition;
+        },
+        onTap: (){
+          print('marker1 tapped: ' + position.toString());
+        },));
+    });
+
   }
   @override
   void initState() {
@@ -45,6 +72,7 @@ class _MapActivityState extends State<MapActivity> {
       position: LatLng(51.5074, 0.1278),
       onDragEnd: (newPosition) {
         print(newPosition.toString());
+        positionx = newPosition;
       },
       onTap: (){
         print('marker tapped: ' + position.toString());
@@ -60,52 +88,120 @@ class _MapActivityState extends State<MapActivity> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            markers: Set.from(allMarkers),
-          ),
+          children: [
+            GoogleMap(
+              mapType: MapType.normal,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              markers: Set.from(allMarkers),
+            ),
+            Container(
+              width: 320,
+              child: Column(
+
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+
+                  Container(
+
+
+                    padding: EdgeInsets.all(16.0),
+                    color: Colors.white,
+                    child: Text(
+
+                      'Selected Address: ${address??'Please type more specific address'}'
+                      ,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    child:Text('SET LOCATION'),
+                    color: Theme.of(context).accentColor,
+                    onPressed: () {
+                      Navigator.pop(context, positionx);
+                    },
+
+                  )
+                ],
+              ),
+            ),
+
+
+
            Column(
              mainAxisAlignment: MainAxisAlignment.start,
              crossAxisAlignment: CrossAxisAlignment.center,
              children: <Widget>[
                TextField(
                  decoration: InputDecoration(
+                   fillColor: Colors.white,
+                   filled: true,
                    border: OutlineInputBorder(),
                    labelText: 'Search Address',
 
                  ),
                  onChanged: (text){
+                   setState(() {
+                     searchString = text;
+                   });
 
                  },
                ),
                RaisedButton(
                  child: Text('Search'),
                  color: Theme.of(context).accentColor,
-                 onPressed: (){
-
+                 onPressed: ()async{
+                   try {
+                     List<Placemark> placemark = await Geolocator()
+                         .placemarkFromAddress(searchString);
+                     position = placemark[0].position;
+                     address = placemark[0].name;
+                   }catch(e){
+                     print(e);
+                     address = null;
+                   }
+                     final GoogleMapController controller = await _controller.future;
+                     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                         target: LatLng(position.latitude,position.longitude),
+                         zoom: 14.151926040649414
+                     ),),);
+                     setState(() {
+                       allMarkers.clear();
+                       address = address;
+                       allMarkers.add(Marker(
+                         markerId: MarkerId('myMarker1'),
+                         draggable: true,
+                         position: LatLng(position.latitude, position.longitude),
+                         onDragEnd: (newPosition) {
+                           print(newPosition.toString());
+                           positionx = newPosition;
+                         },
+                         onTap: (){
+                           print('marker1 tapped: ' + position.toString());
+                         },));
+                     });
                  },
                ),
 
              ],
            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                'Selected Address:'
-                ,
-              ),
-            ),
+
+
           ]
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.fromLTRB(8.0,8.0,0.0,100.0),
+        child: FloatingActionButton(
+
+          onPressed: _goToTheLake,
+          child: Icon(Icons.my_location),
+        ),
       ),
     );
   }

@@ -25,7 +25,7 @@ void main() => runApp(MaterialApp(
      scaffoldBackgroundColor: Colors.grey[200],
      accentColor: Colors.blue[400],
    ),
-   initialRoute: "/login",
+   initialRoute: "/map",
    routes: {
      "/"              : (context)=> home(),
      "/organizerPage" : (context)=> organizerPage(),
