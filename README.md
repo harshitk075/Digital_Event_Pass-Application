@@ -5,8 +5,31 @@
 This application is developed as a semester project for the course Introduction to Software Engineering(ISOE)
 at IIIT Allahabad by the students of IIITA'22, during the 4th semester. 
 
+You can sign-in using google to create events where you can create invitee-lists as well as generate QR-Based tickets
+that can be scanned at the entrance.
+Other users can explore various events and can also register for them.
+
+All the data is maintained in firestore and firebase storage.
+
 ### Key features of the app includes:
 
+- Signin using google.
+- Explore events and register for event.
+- Create and manage user profile that is maintained in the data base.
+- Create, edit or delete events.
+- Images can be added for the event as well as the profile image.
+- Venue can be selected using location picker in map.
+- Maintain a list of the invitees for the event.
+- Generate QR-Based tickets for the event.
+- QR-Code scanner to scan tickets.
+
+
+FUTURE UPDATES: 
+
+- Sending notifications to the guests.
+- Get directions to the venue in Google Maps.
+- Set reminders for the event in calendar.
+- Searchbar and sorting of events by type, time, location etc.
 
 HOW TO INSTALL:
 
