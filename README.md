@@ -43,6 +43,16 @@ and Gradle version 3.6.3. The target sdk version for our project is API 29(Andro
 
 Here are some screenshots of the app:
 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(36).png" width="300"> <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(37).png" width="300"> 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(39).png" width="300"> <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(40).png" width="300"> 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(41).png" width="300"> <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(42).png" width="300"> 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(43).png" width="300"> <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(44).png" width="300"> 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(45).png" width="300"> <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(46).png" width="300"> 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(47).png" width="300"> <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(48).png" width="300"> 
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(51).png" width="300">
+<img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshotm.png" width="300" > 
+ <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(54).png" height="600"> 
+ 
 ### Authors
 - [Shreyansh Sahu](https://github.com/23nobody)
 - [Harshit Kumar](https://github.com/harshitk075)
