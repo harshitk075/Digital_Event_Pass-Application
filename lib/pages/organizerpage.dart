@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/pages/home.dart';
+import 'package:digitaleventpass/pages/loginpage.dart';
+import 'package:digitaleventpass/sign_in.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:digitaleventpass/pages/guest_class.dart';
-import 'package:digitaleventpass/sign_in.dart';
-import 'package:digitaleventpass/pages/loginpage.dart';
-import 'package:digitaleventpass/globals.dart';
-import 'package:digitaleventpass/pages/home.dart';
 
 class organizerPage extends StatefulWidget {
   final String mUid;
@@ -16,25 +13,29 @@ class organizerPage extends StatefulWidget {
 }
 
 class _organizerPageState extends State<organizerPage> {
-
-  List<String> coll= ["Create New Event","Manage Existing Event","View Profile"];
-  List<String> img= ["assets/newevent.png","assets/img2.png","assets/profile.jpg"];
-  List<String> navi=["/newevent","/manageevent","/viewprofile"];
+  List<String> coll = [
+    "Create New Event",
+    "Manage Existing Event",
+    "View Profile"
+  ];
+  List<String> img = [
+    "assets/newevent.png",
+    "assets/img2.png",
+    "assets/profile.jpg"
+  ];
+  List<String> navi = ["/newevent", "/manageevent", "/viewprofile"];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-     if(index==0)
-       {
-          Navigator.pop(context);
-       }
-     else if(index==1)
-       {
-         //Navigator.popAndPushNamed(context, '/');
-         Navigator.pop(context);
-       }
+    if (index == 0) {
+      Navigator.pop(context);
+    } else if (index == 1) {
+      //Navigator.popAndPushNamed(context, '/');
+      Navigator.pop(context);
+    }
   }
 
 //  void checkprofilestatus() async {
@@ -49,9 +50,9 @@ class _organizerPageState extends State<organizerPage> {
 //  }
 
   @override
-   void initState() {
-     fetchProfileData();
-     super.initState();
+  void initState() {
+    fetchProfileData();
+    super.initState();
   }
 
   @override
@@ -128,17 +129,21 @@ class _organizerPageState extends State<organizerPage> {
                                       height: 120.0,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.circular(
-                                            10.0),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
                                       child: Padding(
                                         padding: EdgeInsets.fromLTRB(
                                             10.0, 5.0, 10.0, 5.0),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: <Widget>[
-                                            SizedBox(height: 10.0,),
+                                            SizedBox(
+                                              height: 10.0,
+                                            ),
                                             Flexible(
                                               child: Text(
                                                 coll[idx],
@@ -156,20 +161,22 @@ class _organizerPageState extends State<organizerPage> {
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(20.0),
-                                      boxShadow: [BoxShadow(
-                                        color: Colors.black26,
-                                        offset: Offset(0.0, 2.0),
-                                        blurRadius: 6.0,
-                                      )
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0.0, 2.0),
+                                          blurRadius: 6.0,
+                                        )
                                       ],
                                     ),
                                     child: Stack(
                                       children: <Widget>[
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                              20.0),
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
                                           child: Image(
-                                            height: 180.0, width: 180.0,
+                                            height: 180.0,
+                                            width: 180.0,
                                             image: AssetImage(img[idx]),
                                             fit: BoxFit.cover,
                                           ),
@@ -177,11 +184,11 @@ class _organizerPageState extends State<organizerPage> {
                                       ],
                                     ),
                                   )
-                                ],),
+                                ],
+                              ),
                             ),
                           );
-                        }
-                    ),
+                        }),
                   ),
                 ],
               )
@@ -200,10 +207,10 @@ class _organizerPageState extends State<organizerPage> {
             DrawerHeader(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                     "Hi!  ${home.getUsername()}",
+                    "Hi!  ${home.getUsername()}",
                     style: TextStyle(
                       color: Colors.white,
                       letterSpacing: 2.0,
@@ -213,11 +220,10 @@ class _organizerPageState extends State<organizerPage> {
                 ],
               ),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/party.jpg"),
-                  fit: BoxFit.cover,
-                )
-              ),
+                  image: DecorationImage(
+                image: AssetImage("assets/party.jpg"),
+                fit: BoxFit.cover,
+              )),
             ),
             ListTile(
               title: Text('SET PROFILE'),
@@ -226,26 +232,40 @@ class _organizerPageState extends State<organizerPage> {
                 Navigator.pushNamed(context, "/createorgprofile");
               },
             ),
-            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
+            Divider(
+              height: 2.0,
+              thickness: 2.0,
+              color: Colors.black,
+            ),
             ListTile(
               title: Text('SETTINGS'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
-            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
+            Divider(
+              height: 2.0,
+              thickness: 2.0,
+              color: Colors.black,
+            ),
             ListTile(
               title: Text('LOG OUT'),
               onTap: () {
                 signOutGoogle();
-                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return Login();}), ModalRoute.withName('/'));
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) {
+                  return Login();
+                }), ModalRoute.withName('/'));
               },
             ),
-            Divider(height: 2.0,thickness: 2.0,color: Colors.black,),
+            Divider(
+              height: 2.0,
+              thickness: 2.0,
+              color: Colors.black,
+            ),
           ],
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
         items: [
@@ -268,13 +288,14 @@ class _organizerPageState extends State<organizerPage> {
   void fetchProfileData() async {
     final _firestore = Firestore.instance;
     //print(widget.mUid);
-     var document = await _firestore.collection('OrganizerContainer').document(widget.mUid).get();
-     print(document.data);
-     home.setUsername(document.data['OrgName']);
-     home.setnumber(document.data['OrgContactNumber']);
-     home.setgender(document.data['OrgGender']);
-     home.setemail(document.data['OrgmailId']);
-     home.seturl(document.data['OrgimgURL']);
-     //print(document.data['OrgmailId']);
+    var document =
+        await _firestore.collection('OrganizerContainer').document(uid).get();
+    print(document.data);
+    home.setUsername(document.data['OrgName']);
+    home.setnumber(document.data['OrgContactNumber']);
+    home.setgender(document.data['OrgGender']);
+    home.setemail(document.data['OrgmailId']);
+    home.seturl(document.data['OrgimgURL']);
+    //print(document.data['OrgmailId']);
   }
 }

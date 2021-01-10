@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:digitaleventpass/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/sign_in.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _f = Firestore.instance;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,10 +80,17 @@ class _LoginState extends State<Login> {
 //              },
 //            ),
 //          );
-                if (kSPfirstLogIn)
-                  Navigator.pushReplacementNamed(context, "/createorgprofile");
-                else
-                  Navigator.pushReplacementNamed(context, "/organizerPage");
+                checkIfRegistered().then((x) async {
+                  if (x == false) {
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    preferences.setString('kSPuid', uid);
+                    preferences.setBool('kSPfirstLogIn', false);
+                    Navigator.pushReplacementNamed(
+                        context, "/createorgprofile");
+                  } else
+                    Navigator.pushReplacementNamed(context, "/organizerPage");
+                });
               })
             : Fluttertoast.showToast(
                 msg: 'Please check your internet connection'));
@@ -109,6 +118,26 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  Future<bool> checkIfRegistered() async {
+    bool _isRegistered = false;
+
+    try {
+      print(uid);
+      var value = await _f.collection('OrganizerContainer').document(uid).get();
+      print(value.data);
+      if (value.data != null) {
+        setState(() {
+          _isRegistered = true;
+        });
+      } else {
+        throw Exception("Not registered!");
+      }
+    } catch (e) {
+      print('naaaaaaaaaaa: $e');
+    }
+    return _isRegistered;
   }
 
   Future<bool> checkInternetConnection() async {
