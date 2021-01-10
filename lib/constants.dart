@@ -1,3 +1,2 @@
-
 const kSPuid = 'userId';
-const kSPfirstLogIn='firstLogIn';
+const bool kSPfirstLogIn = true;

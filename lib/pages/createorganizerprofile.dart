@@ -1,57 +1,55 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:digitaleventpass/globals.dart';
 import 'package:digitaleventpass/pages/organizerpage.dart';
+import 'package:digitaleventpass/sign_in.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:digitaleventpass/pages/guest_class.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
-import 'package:digitaleventpass/globals.dart';
-import 'package:digitaleventpass/sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../constants.dart';
 
 class CreateOrganizerProfile extends StatefulWidget {
   @override
   _CreateOrganizerProfileState createState() => _CreateOrganizerProfileState();
 }
-final _firestore = Firestore.instance;
-class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
+final _firestore = Firestore.instance;
+
+class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
   File _image = null;
   String orgID = Globaldata.OrganizerID;
   String orgname;
-  int   orgcontactNumber;
+  int orgcontactNumber;
   String orgmailId;
   String orggender;
   String orgimgurl;
   StorageReference storageReference;
-  bool isphotoupload=true;
+  bool isphotoupload = true;
 
-   Future<void> uploadImage() async{
-
+  Future<void> uploadImage() async {
     String filename = p.basename(_image.path);
     storageReference = FirebaseStorage.instance.ref().child("images/$filename");
     final StorageUploadTask uploadTask = storageReference.putFile(_image);
     final StorageTaskSnapshot downloadUrl = (await uploadTask.onComplete);
     final String url = (await downloadUrl.ref.getDownloadURL());
-    orgimgurl =url;
+    orgimgurl = url;
     setState(() {
-      isphotoupload=true;
+      isphotoupload = true;
     });
   }
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState((){
+    setState(() {
       _image = image;
     });
   }
 
-  Widget BlankIcon(){
+  Widget BlankIcon() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -68,59 +66,67 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-    if(index==0)
-    {
+    if (index == 0) {
       Navigator.pop(context);
-    }
-    else if(index==1)
-    {
+    } else if (index == 1) {
       //Navigator.popAndPushNamed(context, '/');
       Navigator.pop(context);
     }
   }
+
   final databaseReference = Firestore.instance;
   //push to firestore function
 
-    Future PushToDb() async {
-      //make guest object to reference at alter stage
-      bool isNewUser = true;
-      try {
-        await _firestore.collection('OrganizerContainer').document(uid).get().then((value) {
-          if (value.data['OrgmailId']!=null){
-            setState(() {
-              isNewUser=false;
-            });
-            _firestore.collection('OrganizerContainer').document(uid).updateData({
-              'OrgGender' : orggender,
-              'OrgContactNumber' : orgcontactNumber,
-            });
-          }
-        });
-      }
-      catch(e){
-        print('NEW USER');
-      }
-//      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
-      if(isNewUser) {
-        await databaseReference.collection("OrganizerContainer").document(uid)
-            .setData({
-          'OrgName': orgname,
-          'OrgmailId': orgmailId,
-          'OrgGender': orggender,
-          'OrgContactNumber': orgcontactNumber,
-          'OrgimgURL': orgimgurl,
-        });
-      }
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      preferences.setString(kSPuid, uid);
-      preferences.setBool(kSPfirstLogIn, false);
-
-      Fluttertoast.showToast(msg: 'Profile Saved Successfully',toastLength: Toast.LENGTH_SHORT);
-//      Navigator.pop(context);
-      Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => organizerPage(mUid: uid,),));
-
+  Future PushToDb() async {
+    //make guest object to reference at alter stage
+    bool isNewUser = true;
+    try {
+      await _firestore
+          .collection('OrganizerContainer')
+          .document(uid)
+          .get()
+          .then((value) {
+        if (value.data['OrgmailId'] != null) {
+          setState(() {
+            isNewUser = false;
+          });
+          _firestore.collection('OrganizerContainer').document(uid).updateData({
+            'OrgGender': orggender,
+            'OrgContactNumber': orgcontactNumber,
+          });
+        }
+      });
+    } catch (e) {
+      print('NEW USER');
     }
+//      Guest obj = new Guest(orgID,orgname,orgmailId,orggender,orgcontactNumber,orgimgurl);
+    if (isNewUser) {
+      await databaseReference
+          .collection("OrganizerContainer")
+          .document(uid)
+          .setData({
+        'OrgName': orgname,
+        'OrgmailId': orgmailId,
+        'OrgGender': orggender,
+        'OrgContactNumber': orgcontactNumber,
+        'OrgimgURL': orgimgurl,
+      });
+    }
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('kSPuid', uid);
+    preferences.setBool('kSPfirstLogIn', false);
+
+    Fluttertoast.showToast(
+        msg: 'Profile Saved Successfully', toastLength: Toast.LENGTH_SHORT);
+//      Navigator.pop(context);
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => organizerPage(
+            mUid: uid,
+          ),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +154,15 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                           color: Colors.grey[400],
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        child: _image==null ? BlankIcon() : ClipRRect(child: Image.file(_image,fit: BoxFit.cover,),borderRadius: BorderRadius.circular(15.0),),
+                        child: _image == null
+                            ? BlankIcon()
+                            : ClipRRect(
+                                child: Image.file(
+                                  _image,
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
                       ),
                     ),
                     FlatButton(
@@ -160,7 +174,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                       splashColor: Colors.blueAccent,
                       onPressed: () async {
                         await uploadImage();
-                        Fluttertoast.showToast(msg: 'Image Uploaded Successfully',toastLength: Toast.LENGTH_SHORT);
+                        Fluttertoast.showToast(
+                            msg: 'Image Uploaded Successfully',
+                            toastLength: Toast.LENGTH_SHORT);
                       },
                       child: Text(
                         "  Upload  ",
@@ -169,7 +185,9 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                     ),
                   ],
                 ),
-                SizedBox(width: 8.0,),
+                SizedBox(
+                  width: 8.0,
+                ),
                 Expanded(
                   child: Container(
                     height: 160.0,
@@ -179,13 +197,13 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                         TextFormField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-
                             labelText: 'Name',
                           ),
-                          validator: (value) => value.isEmpty? 'Name cannot be empty':null,
+                          validator: (value) =>
+                              value.isEmpty ? 'Name cannot be empty' : null,
                           onChanged: (text) {
                             setState(() {
-                              orgname= text;
+                              orgname = text;
                             });
                           },
                         ),
@@ -195,10 +213,11 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                             labelText: 'Contact Number',
                           ),
                           keyboardType: TextInputType.number,
-                          validator: (value) => value.isEmpty? 'Name cannot be empty':null,
+                          validator: (value) =>
+                              value.isEmpty ? 'Name cannot be empty' : null,
                           onChanged: (value) {
                             setState(() {
-                              orgcontactNumber= int.parse(value);
+                              orgcontactNumber = int.parse(value);
                             });
                           },
                         )
@@ -208,56 +227,59 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
                 )
               ],
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(
+              height: 10.0,
+            ),
             TextFormField(
-              validator: (value) => value.isEmpty? 'Name cannot be empty':null,
+              validator: (value) =>
+                  value.isEmpty ? 'Name cannot be empty' : null,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Email-ID',
               ),
               onChanged: (text) {
                 setState(() {
-                  orgmailId= text;
+                  orgmailId = text;
                 });
               },
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             DropdownButton<String>(
               value: dropdownValue,
-               icon: Icon(Icons.arrow_downward),
-               iconSize: 24,
-               elevation: 16,
-               style: TextStyle(
-               color: Colors.black
-              ),
-                underline: Container(
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.black),
+              underline: Container(
                 height: 2,
                 color: Colors.black,
-               ),
+              ),
               onChanged: (String newValue) {
-              setState(() {
-               dropdownValue = newValue;
-               orggender=newValue;
-              });
+                setState(() {
+                  dropdownValue = newValue;
+                  orggender = newValue;
+                });
               },
-               items: <String>['GENDER', 'MALE', 'FEMALE', 'OTHERS']
-              .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-               );
-             }).toList(),
-             ),
-
+              items: <String>['GENDER', 'MALE', 'FEMALE', 'OTHERS']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: RaisedButton(
                 onPressed: () async {
-                  if(isphotoupload) {
+                  if (isphotoupload) {
                     await PushToDb();
-                  }
-                  else{
-                    Fluttertoast.showToast(msg: 'Upload Image first',toastLength: Toast.LENGTH_SHORT);
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: 'Upload Image first',
+                        toastLength: Toast.LENGTH_SHORT);
                   }
                 },
                 color: Theme.of(context).accentColor,

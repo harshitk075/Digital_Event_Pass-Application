@@ -1,4 +1,6 @@
 import 'dart:io';
+
+import 'package:digitaleventpass/constants.dart';
 import 'package:digitaleventpass/sign_in.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,6 @@ class _LoginState extends State<Login> {
                 color: Colors.white,
               ),
             ),
-
             SizedBox(height: 40.0),
             Padding(
               padding: const EdgeInsets.all(15.0),
@@ -68,8 +69,8 @@ class _LoginState extends State<Login> {
       color: Colors.white,
       splashColor: Colors.white,
       onPressed: () {
-        checkInternetConnection().then((isWorking) => isWorking?
-        signInWithGoogle(context).whenComplete(() {
+        checkInternetConnection().then((isWorking) => isWorking
+            ? signInWithGoogle(context).whenComplete(() {
 //          Navigator.of(context).push(
 //            MaterialPageRoute(
 //              builder: (context) {
@@ -77,8 +78,13 @@ class _LoginState extends State<Login> {
 //              },
 //            ),
 //          );
-          Navigator.pushReplacementNamed(context, "/createorgprofile");
-        }) : Fluttertoast.showToast(msg: 'Please check your internet connection'));
+                if (kSPfirstLogIn)
+                  Navigator.pushReplacementNamed(context, "/createorgprofile");
+                else
+                  Navigator.pushReplacementNamed(context, "/organizerPage");
+              })
+            : Fluttertoast.showToast(
+                msg: 'Please check your internet connection'));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
