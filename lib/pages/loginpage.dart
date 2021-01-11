@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                     Navigator.pushReplacementNamed(
                         context, "/createorgprofile");
                   } else
-                    Navigator.pushReplacementNamed(context, "/organizerPage");
+                    Navigator.pushReplacementNamed(context, "/");
                 });
               })
             : Fluttertoast.showToast(
