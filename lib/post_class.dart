@@ -12,7 +12,8 @@ class Post {
   String  _Orgname;
   int _Orgnumber;
   String _Orgemail;
-	Post(this._eventID, this._eventname, this._eventvenue,this._eventtype, this._duration, this._eventDescription,this._imageUrl,this._Orgname,this._Orgnumber,this._Orgemail,this._eventdateandtime);
+  String _Orgid;
+	Post(this._eventID, this._eventname, this._eventvenue,this._eventtype, this._duration, this._eventDescription,this._imageUrl,this._Orgname,this._Orgnumber,this._Orgemail,this._eventdateandtime,this._Orgid);
 
 	String get eventID => _eventID;
 
@@ -31,7 +32,7 @@ class Post {
 	int get Orgnumber => _Orgnumber;
 
 	String get Orgemail=> _Orgemail;
-
+	String get Orgid=> _Orgid;
 	String get time => _eventdateandtime;
 
 	set imageUrl(String value) {
@@ -63,5 +64,4 @@ class Organiser{
 	String organiserID;
 	String contactNumber;
 	String email;
-
 }

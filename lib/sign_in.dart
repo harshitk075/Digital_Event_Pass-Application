@@ -45,7 +45,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
 
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);
-  print(user.uid);
+//  print(user.uid);
   print("successfully signed in");
 //	await AddOrganizer(uid,name,email);
   SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -62,15 +62,3 @@ void signOutGoogle() async {
   preferences.setBool('kSPfirstLogIn', true);
   print("User Signed Out");
 }
-
-//void addOrganizer(String uid, String name, String email) async{
-//
-//	final _firestore = Firestore.instance;
-//	await _firestore.collection("Organizers").document(uid)
-//			.setData({
-//		'OrganizerName'   : name,
-//		'Organizeremail' : email,
-//		'is_profileset'  : false,
-//	});
-
-//}

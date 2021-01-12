@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:digitaleventpass/post_class.dart';
+import 'package:digitaleventpass/Services/registereventfunction.dart';
 
 class EventDisplay extends StatefulWidget {
 
@@ -12,7 +13,7 @@ class EventDisplay extends StatefulWidget {
 }
 
 class _EventDisplayState extends State<EventDisplay> {
-
+  String eid;
   String ename;
   String etype;
   String evenue;
@@ -22,11 +23,14 @@ class _EventDisplayState extends State<EventDisplay> {
   String Orgname;
   int Orgnumber;
   String Orgemail;
+  String Orgid;
   String time;
+
   @override
   void initState() {
 
     Post newref= widget.box;
+    eid= newref.eventID;
     ename= newref.eventname;
     etype= newref.eventtype;
     evenue= newref.eventvenue;
@@ -36,6 +40,7 @@ class _EventDisplayState extends State<EventDisplay> {
     Orgname= newref.Orgname;
     Orgnumber=newref.Orgnumber;
     Orgemail=newref.Orgemail;
+    Orgid=newref.Orgid;
     time = newref.time;
     super.initState();
   }
@@ -326,6 +331,12 @@ class _EventDisplayState extends State<EventDisplay> {
                 ),
                 SizedBox(height: 20.0),
               ],
+            ),
+            RaisedButton(
+              child: Text('REGISTER HERE'),
+              onPressed: (){
+                registerUser(Orgid,eid).then((value) => print(value));
+              },
             )
           ],
         ),

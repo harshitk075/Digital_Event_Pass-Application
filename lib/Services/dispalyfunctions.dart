@@ -19,8 +19,11 @@ import 'package:digitaleventpass/globals.dart';
       String Orgname= datasnapshot.data['Orgname'];
       int Orgnumber= datasnapshot.data['Orgnumber'];
       String Orgemail= datasnapshot.data['Orgemail'];
+      String orgid=  datasnapshot.data['orgID'];
+      print("SSS");
+      print(orgid);
       String time = datasnapshot.data['eventTimeAndDate'].toString();
-      obj = Post(Id,ename,evenue,etype,dur,des,eurl,Orgname,Orgnumber,Orgemail,time);
+      obj = Post(Id,ename,evenue,etype,dur,des,eurl,Orgname,Orgnumber,Orgemail,time,orgid);
     });
     return obj;
   }
