@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/globals.dart';
-import 'package:digitaleventpass/pages/organizerpage.dart';
 import 'package:digitaleventpass/sign_in.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -118,14 +117,14 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
 
     Fluttertoast.showToast(
         msg: 'Profile Saved Successfully', toastLength: Toast.LENGTH_SHORT);
-//      Navigator.pop(context);
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => organizerPage(
-            mUid: uid,
-          ),
-        ));
+    Navigator.pushReplacementNamed(context, "/");
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => organizerPage(
+    //         mUid: uid,
+    //       ),
+    //     ));
   }
 
   @override

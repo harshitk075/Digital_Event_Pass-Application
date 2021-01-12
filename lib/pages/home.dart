@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'loginpage.dart';
 import 'organizerpage.dart';
 
 bool _firstLogIn;
@@ -101,11 +100,9 @@ class _homeState extends State<home> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => _firstLogIn
-                                ? Login()
-                                : organizerPage(
-                                    mUid: _uid,
-                                  ),
+                            builder: (context) => organizerPage(
+                              mUid: _uid,
+                            ),
                           ));
                     },
                     child: Container(
@@ -178,6 +175,7 @@ class _homeState extends State<home> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     _uid = preferences.getString('kSPuid') ?? "UIDNotFound";
     _firstLogIn = preferences.getBool('kSPfirstLogIn') ?? true;
+
     if (_firstLogIn) {
       await _firestore
           .collection('OrganizerContainer')

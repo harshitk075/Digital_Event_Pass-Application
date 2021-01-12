@@ -5,6 +5,7 @@ import 'package:digitaleventpass/pages/display_event.dart';
 import 'package:digitaleventpass/pages/eventinviteelist.dart';
 import 'package:digitaleventpass/pages/eventupdations.dart';
 import 'package:digitaleventpass/pages/home.dart';
+import 'package:digitaleventpass/pages/loading_screen.dart';
 import 'package:digitaleventpass/pages/loginpage.dart';
 import 'package:digitaleventpass/pages/manageevent.dart';
 import 'package:digitaleventpass/pages/organizerpage.dart';
@@ -25,9 +26,10 @@ void main() => runApp(MaterialApp(
         scaffoldBackgroundColor: Colors.grey[200],
         accentColor: Colors.blue[400],
       ),
-      initialRoute: "/",
+      initialRoute: "/loading",
       routes: {
         "/": (context) => home(),
+        "/loading": (context) => LoadingPage(),
         "/organizerPage": (context) => organizerPage(),
         "/userPage": (context) => userPage(),
         "/manageevent": (context) => ManageEvent(),
