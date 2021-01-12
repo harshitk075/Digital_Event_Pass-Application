@@ -124,9 +124,9 @@ class _LoginState extends State<Login> {
     bool _isRegistered = false;
 
     try {
-      print(uid);
+      print("ss $uid");
       var value = await _f.collection('OrganizerContainer').document(uid).get();
-      print(value.data);
+      print("Ff  ${value.data}");
       if (value.data != null) {
         setState(() {
           _isRegistered = true;

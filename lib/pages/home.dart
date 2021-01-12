@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'organizerpage.dart';
 
 bool _firstLogIn;
@@ -176,13 +175,17 @@ class _homeState extends State<home> {
     _uid = preferences.getString('kSPuid') ?? "UIDNotFound";
     _firstLogIn = preferences.getBool('kSPfirstLogIn') ?? true;
 
-    if (_firstLogIn) {
+    if (!_firstLogIn) {
       await _firestore
           .collection('OrganizerContainer')
           .document(_uid)
           .get()
-          .then((data) async {
-        home.setUsername(data.data['OrgName']);
+          .then((document) async {
+          home.setUsername(document.data['OrgName']);
+          home.setnumber(document.data['OrgContactNumber']);
+          home.setgender(document.data['OrgGender']);
+          home.setemail(document.data['OrgmailId']);
+          home.seturl(document.data['OrgimgURL']);
       });
     }
   }

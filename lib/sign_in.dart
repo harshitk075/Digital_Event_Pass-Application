@@ -45,7 +45,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
 
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);
-  print(user.uid);
+//  print(user.uid);
   print("successfully signed in");
 //	await AddOrganizer(uid,name,email);
   SharedPreferences preferences = await SharedPreferences.getInstance();

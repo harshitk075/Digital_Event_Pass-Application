@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:digitaleventpass/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'loginpage.dart';
 
 class LoadingPage extends StatefulWidget {

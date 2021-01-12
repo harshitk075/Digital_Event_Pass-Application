@@ -43,7 +43,7 @@ class _organizerPageState extends State<organizerPage> {
 
   @override
   void initState() {
-    fetchProfileData();
+//    fetchProfileData();
     super.initState();
   }
 
@@ -275,17 +275,5 @@ class _organizerPageState extends State<organizerPage> {
         onTap: _onItemTapped,
       ),
     );
-  }
-
-  void fetchProfileData() async {
-    final _firestore = Firestore.instance;
-    var document =
-        await _firestore.collection('OrganizerContainer').document(uid).get();
-    print(document.data);
-    home.setUsername(document.data['OrgName']);
-    home.setnumber(document.data['OrgContactNumber']);
-    home.setgender(document.data['OrgGender']);
-    home.setemail(document.data['OrgmailId']);
-    home.seturl(document.data['OrgimgURL']);
   }
 }
