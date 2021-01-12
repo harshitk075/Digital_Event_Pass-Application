@@ -13,16 +13,19 @@ class organizerPage extends StatefulWidget {
 }
 
 class _organizerPageState extends State<organizerPage> {
+
   List<String> coll = [
     "Create New Event",
     "Manage Existing Event",
     "View Profile"
   ];
+
   List<String> img = [
     "assets/newevent.png",
     "assets/img2.png",
     "assets/profile.jpg"
   ];
+
   List<String> navi = ["/newevent", "/manageevent", "/viewprofile"];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -37,17 +40,6 @@ class _organizerPageState extends State<organizerPage> {
       Navigator.pop(context);
     }
   }
-
-//  void checkprofilestatus() async {
-//    final databaseReference = Firestore.instance;
-//    DocumentReference documentReference =
-//    databaseReference.collection("Organizers").document(Globaldata.OrganizerID);
-//    await documentReference.get().then((datasnapshot) {
-//
-//      bool X=  datasnapshot.data['is_profileset'];
-//      Guest.is_profileset=X;
-//    });
-//  }
 
   @override
   void initState() {
@@ -287,7 +279,6 @@ class _organizerPageState extends State<organizerPage> {
 
   void fetchProfileData() async {
     final _firestore = Firestore.instance;
-    //print(widget.mUid);
     var document =
         await _firestore.collection('OrganizerContainer').document(uid).get();
     print(document.data);
@@ -296,6 +287,5 @@ class _organizerPageState extends State<organizerPage> {
     home.setgender(document.data['OrgGender']);
     home.setemail(document.data['OrgmailId']);
     home.seturl(document.data['OrgimgURL']);
-    //print(document.data['OrgmailId']);
   }
 }

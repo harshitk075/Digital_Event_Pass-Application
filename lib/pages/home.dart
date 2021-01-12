@@ -178,7 +178,7 @@ class _homeState extends State<home> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     _uid = preferences.getString('kSPuid') ?? "UIDNotFound";
     _firstLogIn = preferences.getBool('kSPfirstLogIn') ?? true;
-    if (!_firstLogIn) {
+    if (_firstLogIn) {
       await _firestore
           .collection('OrganizerContainer')
           .document(_uid)

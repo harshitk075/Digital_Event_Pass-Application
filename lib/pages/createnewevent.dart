@@ -55,7 +55,7 @@ class _CreateNewEventState extends State<CreateNewEvent> {
   Future SaveEvent() async {
     await uploadImage();
     //print(imageUrl);
-    await databaseReference.collection("OrganizerContainer").document(home.getUid()).collection("Events")
+    var docref= await databaseReference.collection("OrganizerContainer").document(home.getUid()).collection("Events")
           .add({
       "eventname": eventname,
       "eventtype": eventtype,
@@ -67,11 +67,12 @@ class _CreateNewEventState extends State<CreateNewEvent> {
       "Orgname":  home.getUsername(),
       "Orgnumber": home.getnumber(),
       "Orgemail"  : home.getemail(),
-
+      "orgID" :  home.getUid(),
     });
-
-    await databaseReference.collection("events")
-        .add({
+//    print("id of event is ");
+//    print(docref.documentID);
+    await databaseReference.collection("events").document(docref.documentID)
+        .setData({
       "eventname": eventname,
       "eventtype": eventtype,
       "eventduration":duration,
@@ -79,9 +80,10 @@ class _CreateNewEventState extends State<CreateNewEvent> {
       "imageurl"  : imageUrl,
       "eventdescription" : description,
       "eventTimeAndDate" : time.toString(),
-      "Orgname":  home.getUsername(),
-      "Orgnumber": home.getnumber(),
+      "Orgname":    home.getUsername(),
+      "Orgnumber":  home.getnumber(),
       "Orgemail"  : home.getemail(),
+      "orgID" :  home.getUid(),
     });
   }
 

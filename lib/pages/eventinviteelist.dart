@@ -31,7 +31,7 @@ class _MakeListState extends State<MakeList> {
   Future<List<User>> _getuser(String ID) async {
     List<User> newUpdatesList = [];
     await for(var snapshot in _firestore.collection('OrganizerContainer').document(home.getUid() ).collection("Events").
-        document(ID).collection('Inviteelist').snapshots())
+    document(ID).collection('Inviteelist').snapshots())
     {
       //print(snapshot.documents.length);
       for(var message in snapshot.documents)

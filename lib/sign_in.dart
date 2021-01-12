@@ -62,15 +62,3 @@ void signOutGoogle() async {
   preferences.setBool('kSPfirstLogIn', true);
   print("User Signed Out");
 }
-
-//void addOrganizer(String uid, String name, String email) async{
-//
-//	final _firestore = Firestore.instance;
-//	await _firestore.collection("Organizers").document(uid)
-//			.setData({
-//		'OrganizerName'   : name,
-//		'Organizeremail' : email,
-//		'is_profileset'  : false,
-//	});
-
-//}
