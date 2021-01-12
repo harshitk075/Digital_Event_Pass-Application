@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/pages/home.dart';
 import 'package:digitaleventpass/pages/loginpage.dart';
 import 'package:digitaleventpass/sign_in.dart';
