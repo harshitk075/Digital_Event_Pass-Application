@@ -197,7 +197,12 @@ class _MapActivityState extends State<MapActivity> {
   }
 
   Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    // final GoogleMapController controller = await _controller.future;
+    getLocation();
+    // controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+    //     bearing: 192.8334901395799,
+    //     target: LatLng(position.latitude, position.longitude),
+    //     tilt: 59.440717697143555,
+    //     zoom: 14.151926040649414)));
   }
 }
