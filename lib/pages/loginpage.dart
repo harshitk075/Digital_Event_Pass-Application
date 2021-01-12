@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -86,6 +88,7 @@ class _LoginState extends State<Login> {
                         await SharedPreferences.getInstance();
                     preferences.setString('kSPuid', uid);
                     preferences.setBool('kSPfirstLogIn', false);
+                    home.setUid(uid);
                     Navigator.pushReplacementNamed(
                         context, "/createorgprofile");
                   } else

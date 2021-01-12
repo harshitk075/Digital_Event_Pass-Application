@@ -11,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home.dart';
+
 class CreateOrganizerProfile extends StatefulWidget {
   @override
   _CreateOrganizerProfileState createState() => _CreateOrganizerProfileState();
@@ -114,7 +116,7 @@ class _CreateOrganizerProfileState extends State<CreateOrganizerProfile> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('kSPuid', uid);
     preferences.setBool('kSPfirstLogIn', false);
-
+    home.setUid(uid);
     Fluttertoast.showToast(
         msg: 'Profile Saved Successfully', toastLength: Toast.LENGTH_SHORT);
     Navigator.pushReplacementNamed(context, "/");

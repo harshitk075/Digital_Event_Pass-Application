@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitaleventpass/pages/home.dart';
 import 'package:digitaleventpass/pages/loginpage.dart';
 import 'package:digitaleventpass/sign_in.dart';
@@ -51,7 +50,6 @@ class _organizerPageState extends State<organizerPage> {
 
   @override
   void initState() {
-    fetchProfileData();
     super.initState();
   }
 
@@ -283,19 +281,5 @@ class _organizerPageState extends State<organizerPage> {
         onTap: _onItemTapped,
       ),
     );
-  }
-
-  void fetchProfileData() async {
-    final _firestore = Firestore.instance;
-    //print(widget.mUid);
-    var document =
-        await _firestore.collection('OrganizerContainer').document(uid).get();
-    print(document.data);
-    home.setUsername(document.data['OrgName']);
-    home.setnumber(document.data['OrgContactNumber']);
-    home.setgender(document.data['OrgGender']);
-    home.setemail(document.data['OrgmailId']);
-    home.seturl(document.data['OrgimgURL']);
-    //print(document.data['OrgmailId']);
   }
 }

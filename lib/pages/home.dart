@@ -58,6 +58,7 @@ class _homeState extends State<home> {
   void initState() {
     super.initState();
     checkLogin();
+    fetchProfileData();
   }
 
   @override
@@ -184,6 +185,20 @@ class _homeState extends State<home> {
     //     home.setUsername(data.data['OrgName']);
     //   });
     // }
+  }
+
+  Future<void> fetchProfileData() async {
+    final _firestore = Firestore.instance;
+    //print(widget.mUid);
+    var document =
+        await _firestore.collection('OrganizerContainer').document(_uid).get();
+    print(document.data);
+    home.setUsername(document.data['OrgName']);
+    home.setnumber(document.data['OrgContactNumber']);
+    home.setgender(document.data['OrgGender']);
+    home.setemail(document.data['OrgmailId']);
+    home.seturl(document.data['OrgimgURL']);
+    //print(document.data['OrgmailId']);
   }
 }
 
