@@ -2,9 +2,6 @@
 
 ## An android application to manage and organise events.
 
-This application is developed as a semester project for the course Introduction to Software Engineering(ISOE)
-at IIIT Allahabad by the students of IIITA'22, during the 4th semester. 
-
 You can sign-in using google to create events where you can create invitee-lists as well as generate QR-Based tickets
 that can be scanned at the entrance.
 Other users can explore various events and can also register for them.
@@ -53,7 +50,3 @@ Here are some screenshots of the app:
 <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshotm.png" width="300" > 
  <img src="https://github.com/harshitk075/Digital_Event_Pass-Application/blob/master/Screenshot%20(54).png" height="600"> 
  
-### Authors
-- [Shreyansh Sahu](https://github.com/23nobody)
-- [Harshit Kumar](https://github.com/harshitk075)
-- [Sahma Anwar](https://github.com/Sahma61)
